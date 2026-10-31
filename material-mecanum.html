@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163c6c">
+  <title>Bánh xe mecanum hoạt động như thế nào? · RCT Lab</title>
+  <link rel="icon" type="image/svg+xml" href="assets/rct-network-icon.svg">
+  <style>
+    :root{--navy:#163c6c;--ink:#171c23;--body:#2b3645;--muted:#566577;--line:#c9d8ec;--card:rgba(255,255,255,.78);--orange:#e9803d;--tag:#b4531f;--blue:#1f6fd6;
+      --shadow:0 1px 2px rgba(22,60,108,.05),0 6px 18px rgba(22,60,108,.06)}
+    *{box-sizing:border-box}
+    html{background:#e6effa}
+    body{margin:0;background:linear-gradient(160deg,#d3e3f7 0%,#e6effa 36%,#fde9d6 66%,#fbcfa3 100%);background-attachment:fixed;color:var(--ink);font:15px/1.6 "Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    main{max-width:880px;margin:0 auto;padding:22px 20px 56px}
+    a.back{display:inline-block;color:var(--navy);font-weight:600;text-decoration:none;font-size:14px;margin-bottom:14px}
+    a.back:hover{color:var(--tag)}
+    .tag{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tag)}
+    h1{color:var(--navy);font-size:clamp(26px,4.4vw,36px);line-height:1.15;font-weight:700;margin:4px 0 8px;letter-spacing:-.01em}
+    .lede{color:var(--muted);font-size:16px;margin:0 0 18px}
+    h2{font-size:20px;line-height:1.25;font-weight:700;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+    h2 .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--navy);color:#fff;font-size:14px;flex-shrink:0;box-shadow:2px 2px 0 var(--orange)}
+    h3{font-size:15.5px;font-weight:600;margin:12px 0 4px}
+    p,li{color:var(--body)}
+    p{margin:0 0 10px}
+    ul{margin:0 0 10px;padding-left:20px}
+    li{margin-bottom:4px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;margin-top:14px}
+    .clip{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#e8f0fa}
+    .clip video{display:block;width:100%;height:auto;aspect-ratio:3/2}
+    table{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0 4px}
+    th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;text-align:center;padding:7px 6px;border-bottom:1px solid var(--line)}
+    th:first-child,td:first-child{text-align:left}
+    td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+    tr:last-child td{border-bottom:0}
+    .p{color:#c4581f;font-weight:700}.m{color:var(--navy);font-weight:700}.z{color:#8a96a6;font-weight:700}
+    .eq{font:600 14px/1.9 Consolas,"SFMono-Regular",monospace;color:var(--navy);background:#f3f7fc;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:6px 0 10px;overflow-x:auto;white-space:pre}
+    .note{border-left:3px solid var(--orange);background:#fff7ef;border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0 2px}
+    .scroll{overflow-x:auto}
+    @media (max-width:560px){main{padding:16px 16px 40px}.card{padding:16px}td,th{padding:6px 4px}}
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html#teaching">← RCT Lab · Tài liệu</a>
+  <span class="tag">Nguyên lý / Mecanum</span>
+  <h1>Bánh xe mecanum hoạt động như thế nào?</h1>
+  <p class="lede">Vì sao một xe bốn bánh có thể đi ngang và quay tại chỗ mà không cần cơ cấu lái.</p>
+
+  <figure class="clip"><video id="clip" muted loop playsinline preload="metadata" controls poster="assets/mecanum-clip-poster.png" aria-label="Clip minh họa: con lăn 45° và bốn kiểu chuyển động của xe mecanum"><source src="assets/mecanum-clip.mp4" type="video/mp4"><source src="assets/mecanum-clip.webm" type="video/webm"></video></figure>
+
+  <section class="card">
+    <h2><span class="n">1</span>Cấu tạo bánh</h2>
+    <p>Bánh mecanum gồm một moay-ơ và nhiều con lăn bị động gắn quanh vành. Trục mỗi con lăn lệch 45° so với trục bánh. Con lăn không có động cơ, nó tự quay tự do quanh trục của chính nó.</p>
+    <p>Bánh có hai loại, nghiêng trái và nghiêng phải. Một xe dùng hai bánh mỗi loại, đặt chéo nhau.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">2</span>Lực tại điểm chạm đất</h2>
+    <p>Khi động cơ quay bánh, con lăn đang chạm đất bị kéo theo. Theo phương vuông góc với trục con lăn, con lăn tự lăn đi nên gần như không truyền lực. Lực chỉ truyền được dọc theo trục con lăn.</p>
+    <p>Vì trục con lăn nghiêng 45°, lực đẩy của mỗi bánh cũng nghiêng 45°. Có thể tách lực này thành hai thành phần bằng nhau: một thành phần dọc thân xe và một thành phần ngang.</p>
+    <div class="eq">F_dọc = F_ngang = F / √2   (mô hình lý tưởng, không trượt)</div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">3</span>Bố trí bốn bánh</h2>
+    <p>Ký hiệu bánh: FL trước trái, FR trước phải, RL sau trái, RR sau phải. Bánh FL và RR cùng một loại, FR và RL cùng loại còn lại.</p>
+    <p>Với bố trí dùng trong clip, khi bánh quay tiến, lực của FL và RR hướng chéo lên bên phải, lực của FR và RL hướng chéo lên bên trái. Nhìn từ trên xuống xe thật, các con lăn phía trên của bốn bánh tạo thành chữ X. Clip vẽ con lăn đang chạm đất (nhìn xuyên qua bánh), nên vạch trong clip nghiêng theo chiều ngược lại.</p>
+    <div class="note">Nếu đổi chỗ hai loại bánh, xe vẫn tiến và đi ngang được (dấu lệnh đổi), nhưng mô-men quay quanh tâm gần như triệt tiêu, nên xe quay tại chỗ rất yếu. Đây là lỗi lắp ráp hay gặp.</div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">4</span>Bốn kiểu chuyển động cơ bản</h2>
+    <p>Dấu <span class="p">+</span> là bánh quay tiến, <span class="m">−</span> là quay lùi, <span class="z">0</span> là đứng yên. Đổi toàn bộ dấu thì xe đi theo hướng ngược lại.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Chuyển động</th><th>FL</th><th>FR</th><th>RL</th><th>RR</th><th>Lý do</th></tr></thead>
+      <tbody>
+        <tr><td>Tiến</td><td class="p">+</td><td class="p">+</td><td class="p">+</td><td class="p">+</td><td style="text-align:left">thành phần ngang triệt tiêu</td></tr>
+        <tr><td>Đi ngang phải</td><td class="p">+</td><td class="m">−</td><td class="m">−</td><td class="p">+</td><td style="text-align:left">thành phần dọc triệt tiêu</td></tr>
+        <tr><td>Quay phải tại chỗ</td><td class="p">+</td><td class="m">−</td><td class="p">+</td><td class="m">−</td><td style="text-align:left">các lực tạo mô-men quanh tâm</td></tr>
+        <tr><td>Đi chéo lên phải</td><td class="p">+</td><td class="z">0</td><td class="z">0</td><td class="p">+</td><td style="text-align:left">chỉ hai bánh chéo đẩy</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">5</span>Tính tốc độ từng bánh</h2>
+    <p>Đặt hệ trục gắn với xe: <b>v<sub>x</sub></b> là vận tốc tiến, <b>v<sub>y</sub></b> là vận tốc sang trái, <b>ω</b> là vận tốc góc ngược chiều kim đồng hồ. <b>l<sub>x</sub></b> và <b>l<sub>y</sub></b> là nửa khoảng cách trục trước–sau và nửa khoảng cách bánh trái–phải, <b>r</b> là bán kính bánh. Đặt k = l<sub>x</sub> + l<sub>y</sub>.</p>
+    <h3>Động học nghịch: từ chuyển động mong muốn ra tốc độ bánh</h3>
+    <div class="eq">ω_FL = (v_x − v_y − k·ω) / r
+ω_FR = (v_x + v_y + k·ω) / r
+ω_RL = (v_x + v_y − k·ω) / r
+ω_RR = (v_x − v_y + k·ω) / r</div>
+    <h3>Động học thuận: từ tốc độ bánh ra chuyển động của xe</h3>
+    <div class="eq">v_x = r/4 · ( ω_FL + ω_FR + ω_RL + ω_RR)
+v_y = r/4 · (−ω_FL + ω_FR + ω_RL − ω_RR)
+ω   = r/(4k) · (−ω_FL + ω_FR − ω_RL + ω_RR)</div>
+    <p>Thử lại: đi ngang phải là v<sub>y</sub> = −1, cho FL = +, FR = −, RL = −, RR = +, đúng với bảng ở mục 4. Nếu chọn v<sub>y</sub> dương sang phải hoặc ω dương theo chiều kim đồng hồ thì các dấu tương ứng đổi theo.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">6</span>Chuẩn hóa lệnh</h2>
+    <p>Khi vừa tiến, vừa đi ngang, vừa quay, tốc độ tính ra cho một bánh có thể vượt giới hạn động cơ. Nếu chỉ cắt riêng bánh đó, tỉ lệ giữa các bánh bị lệch và xe đi sai hướng.</p>
+    <p>Cách làm đúng là chia cả bốn giá trị cho cùng một hệ số:</p>
+    <div class="eq">m = max(|ω_FL|, |ω_FR|, |ω_RL|, |ω_RR|)
+nếu m &gt; ω_max:  ω_i ← ω_i · ω_max / m</div>
+    <p>Xe chạy chậm lại nhưng giữ đúng hướng và đúng tỉ lệ quay.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">7</span>Lưu ý khi lắp và lập trình</h2>
+    <ul>
+      <li>Động cơ bên trái và bên phải thường lắp đối xứng, nên cùng một lệnh dương làm hai bên quay ngược nhau. Đảo dấu lệnh hoặc đảo dây cho đúng hướng lắp thực tế.</li>
+      <li>Kiểm từng bánh riêng: gửi lệnh "tiến" cho một bánh, xem nó có quay tiến không, rồi mới chạy các tổ hợp.</li>
+      <li>Kiểm hướng con lăn trước khi chạy: sai loại bánh ở một vị trí làm xe đi lệch hoặc không quay được.</li>
+      <li>Công thức trên giả định con lăn không trượt. Trên sàn thật, con lăn trượt và tải phân bố không đều, nên đi ngang thường kém chính xác hơn đi thẳng; đo quãng đường bằng encoder bánh dễ sai lệch.</li>
+    </ul>
+  </section>
+</main>
+<script>
+  // Clip tự phát không tiếng khi cuộn tới, trừ khi người xem bật giảm chuyển động
+  (function () {
+    var v = document.getElementById('clip');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!v || reduce || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
+    }, { threshold: .35 }).observe(v);
+  })();
+</script>
+</body>
+</html>

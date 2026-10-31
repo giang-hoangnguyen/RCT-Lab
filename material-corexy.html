@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163c6c">
+  <title>Khung CoreXY hoạt động như thế nào? · RCT Lab</title>
+  <link rel="icon" type="image/svg+xml" href="assets/rct-network-icon.svg">
+  <style>
+    :root{--navy:#163c6c;--ink:#171c23;--body:#2b3645;--muted:#566577;--line:#c9d8ec;--card:rgba(255,255,255,.78);--orange:#e9803d;--tag:#b4531f;--blue:#1f6fd6;
+      --shadow:0 1px 2px rgba(22,60,108,.05),0 6px 18px rgba(22,60,108,.06)}
+    *{box-sizing:border-box}
+    html{background:#e6effa}
+    body{margin:0;background:linear-gradient(160deg,#d3e3f7 0%,#e6effa 36%,#fde9d6 66%,#fbcfa3 100%);background-attachment:fixed;color:var(--ink);font:15px/1.6 "Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    main{max-width:880px;margin:0 auto;padding:22px 20px 56px}
+    a.back{display:inline-block;color:var(--navy);font-weight:600;text-decoration:none;font-size:14px;margin-bottom:14px}
+    a.back:hover{color:var(--tag)}
+    .tag{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tag)}
+    h1{color:var(--navy);font-size:clamp(26px,4.4vw,36px);line-height:1.15;font-weight:700;margin:4px 0 8px;letter-spacing:-.01em}
+    .lede{color:var(--muted);font-size:16px;margin:0 0 18px}
+    h2{font-size:20px;line-height:1.25;font-weight:700;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+    h2 .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--navy);color:#fff;font-size:14px;flex-shrink:0;box-shadow:2px 2px 0 var(--orange)}
+    h3{font-size:15.5px;font-weight:600;margin:12px 0 4px}
+    p,li{color:var(--body)}
+    p{margin:0 0 10px}
+    ul{margin:0 0 10px;padding-left:20px}
+    li{margin-bottom:4px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;margin-top:14px}
+    .clip{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#e8f0fa}
+    .clip video{display:block;width:100%;height:auto;aspect-ratio:3/2}
+    table{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0 4px}
+    th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;text-align:center;padding:7px 6px;border-bottom:1px solid var(--line)}
+    th:first-child,td:first-child{text-align:left}
+    td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+    tr:last-child td{border-bottom:0}
+    .p{color:#c4581f;font-weight:700}.m{color:var(--navy);font-weight:700}.z{color:#8a96a6;font-weight:700}
+    .eq{font:600 14px/1.9 Consolas,"SFMono-Regular",monospace;color:var(--navy);background:#f3f7fc;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:6px 0 10px;overflow-x:auto;white-space:pre}
+    .note{border-left:3px solid var(--orange);background:#fff7ef;border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0 2px}
+    .scroll{overflow-x:auto}
+    @media (max-width:560px){main{padding:16px 16px 40px}.card{padding:16px}td,th{padding:6px 4px}}
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html#teaching">← RCT Lab · Tài liệu</a>
+  <span class="tag">Nguyên lý / CoreXY</span>
+  <h1>Khung CoreXY hoạt động như thế nào?</h1>
+  <p class="lede">Hai động cơ đứng yên điều khiển đầu gắp trên cả mặt phẳng XY; trục Z và tay gắp hoàn tất thao tác gắp, thả.</p>
+
+  <figure class="clip"><video id="clip" muted loop playsinline preload="metadata" controls poster="assets/corexy-clip-poster.png" aria-label="Clip minh họa cách động cơ A, B, Z của khung CoreXY phối hợp để gắp và thả vật"><source src="assets/corexy-clip.mp4" type="video/mp4"><source src="assets/corexy-clip.webm" type="video/webm"></video></figure>
+
+  <section class="card">
+    <h2><span class="n">1</span>Cấu tạo</h2>
+    <p>Khung hộp có hai ray dọc theo trục Y. Thanh ngang (gantry) chạy trên hai ray đó, và đầu gắp chạy trên thanh ngang theo trục X. Đầu gắp mang trục Z để nâng hạ tay gắp.</p>
+    <ul>
+      <li><b>Động cơ A, B:</b> gắn cố định ở hai góc sau của khung, mỗi động cơ kéo một dây đai.</li>
+      <li><b>Hai dây đai:</b> hai đầu của mỗi đai cùng gắn vào đầu gắp; đai đi qua các puly ở hai đầu thanh ngang và ở góc khung.</li>
+      <li><b>Động cơ Z:</b> nâng hạ tay gắp, thường bằng vít me hoặc đai.</li>
+      <li><b>Tay gắp:</b> đóng mở bằng một cơ cấu chấp hành riêng (servo hoặc động cơ nhỏ).</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">2</span>Vì sao một động cơ làm đầu gắp đi chéo</h2>
+    <p>Cách đi đai của CoreXY làm cho quãng đai mỗi động cơ cần kéo bằng tổng hoặc hiệu của quãng đường đầu gắp đi theo X và Y:</p>
+    <div class="eq">A = X + Y
+B = X − Y</div>
+    <p>Khi chỉ A quay, B đứng yên nên X − Y = 0, tức X = Y: đầu gắp đi theo đường chéo 45°. Khi chỉ B quay, X + Y = 0: đầu gắp đi theo đường chéo còn lại.</p>
+    <p>Hai đai thường đặt ở hai tầng cao khác nhau để không cọ vào nhau khi đi qua thanh ngang.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">3</span>Phối hợp A và B</h2>
+    <p>Dấu <span class="p">+</span> là quay thuận, <span class="m">−</span> là quay ngược, <span class="z">0</span> là đứng yên. Chiều dương thực tế tùy cách lắp động cơ.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Đầu gắp đi</th><th>A</th><th>B</th><th>Lý do</th></tr></thead>
+      <tbody>
+        <tr><td>Theo +X</td><td class="p">+</td><td class="p">+</td><td style="text-align:left">hai vectơ chéo cộng lại, thành phần Y triệt tiêu</td></tr>
+        <tr><td>Theo +Y</td><td class="p">+</td><td class="m">−</td><td style="text-align:left">thành phần X triệt tiêu</td></tr>
+        <tr><td>Chéo (+X, +Y)</td><td class="p">+</td><td class="z">0</td><td style="text-align:left">chỉ A kéo</td></tr>
+        <tr><td>Chéo (+X, −Y)</td><td class="z">0</td><td class="p">+</td><td style="text-align:left">chỉ B kéo</td></tr>
+      </tbody>
+    </table></div>
+    <p>Đổi toàn bộ dấu thì đầu gắp đi theo hướng ngược lại.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">4</span>Từ tọa độ ra lệnh động cơ</h2>
+    <h3>Động học nghịch và thuận</h3>
+    <div class="eq">A = X + Y          X = (A + B) / 2
+B = X − Y          Y = (A − B) / 2</div>
+    <p>A, B là quãng đai (mm) mỗi động cơ kéo. Muốn đưa đầu gắp tới điểm (X, Y), tính A, B rồi đổi ra số bước động cơ.</p>
+    <h3>Đổi quãng đai ra số bước</h3>
+    <div class="eq">số bước / mm = (số bước mỗi vòng × vi bước) / (số răng puly × bước răng đai)</div>
+    <p>Ví dụ: động cơ 200 bước/vòng, vi bước 16, puly 20 răng, đai bước 2 mm: 200 × 16 / (20 × 2) = 80 bước/mm.</p>
+    <p>Hai động cơ phải chạy đồng bộ theo thời gian: để đi một đoạn thẳng, A và B tăng tốc, chạy và giảm tốc cùng lúc theo đúng tỉ lệ. Nhiều firmware điều khiển máy in 3D và CNC có sẵn chế độ động học CoreXY, chỉ cần khai báo.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">5</span>Trục Z và tay gắp: một chu trình gắp, thả</h2>
+    <ol>
+      <li>A, B đưa đầu gắp tới phía trên vật, Z ở vị trí cao.</li>
+      <li>Z hạ xuống, tay gắp kẹp vật.</li>
+      <li>Z nâng vật lên độ cao an toàn.</li>
+      <li>A, B đưa đầu gắp tới khay; Z hạ, tay gắp nhả vật, rồi Z nâng lên.</li>
+    </ol>
+    <div class="note">Chỉ di chuyển X, Y khi Z đã ở độ cao an toàn, để tay gắp không va vào vật hay thành khay. Khi gần chạm vật, nên hạ Z chậm hơn.</div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">6</span>Ưu điểm</h2>
+    <ul>
+      <li><b>Động cơ đứng yên:</b> chỉ thanh ngang và đầu gắp chuyển động, nên khối lượng di chuyển nhỏ, tăng giảm tốc nhanh hơn.</li>
+      <li><b>Hai động cơ cùng kéo:</b> khi đi theo X hoặc Y, cả A và B đều góp lực.</li>
+      <li><b>Khung hộp gọn:</b> vùng làm việc lớn so với kích thước khung, dễ làm vỏ kín.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">7</span>Nhược điểm và lưu ý</h2>
+    <ul>
+      <li>Dây đai dài nên có độ đàn hồi; hai đai cần căng đều. Căng lệch thì đường đi bị méo và thanh ngang có thể bị lệch khỏi phương vuông góc với ray.</li>
+      <li>Đường đi đai phức tạp, nhiều puly, lắp ráp và căn chỉnh tốn công hơn khung Cartesian thông thường.</li>
+      <li>Thanh ngang phải luôn vuông góc với hai ray; kiểm tra và căn lại sau khi lắp hoặc thay đai.</li>
+      <li>Lệnh X mà đầu gắp lại đi theo Y: thường do một động cơ bị đảo chiều. Đi đúng trục nhưng Y bị ngược hướng: có thể A và B bị đổi chỗ.</li>
+    </ul>
+  </section>
+</main>
+<script>
+  // Clip tự phát không tiếng khi cuộn tới, trừ khi người xem bật giảm chuyển động
+  (function () {
+    var v = document.getElementById('clip');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!v || reduce || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
+    }, { threshold: .35 }).observe(v);
+  })();
+</script>
+</body>
+</html>

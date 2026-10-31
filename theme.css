@@ -1,0 +1,171 @@
+/* Duotone navy + cam nhạt, chữ theo site cá nhân (Segoe UI/Inter, 15px/1.5, tiêu đề 600). Load sau revisions.css. */
+:root{--navy:#163c6c;--navy-deep:#0b2b56;--orange:#e9803d;--orange-dark:#b4531f;--ink:#171c23;--muted:#566577;--line:#c9d8ec;
+  --duo:linear-gradient(160deg,#d3e3f7 0%,#e6effa 36%,#fde9d6 66%,#fbcfa3 100%)}
+html{background:#e6effa}
+body{background:var(--duo);background-attachment:fixed;color:var(--ink);font:15px/1.5 "Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.preview-note{background:var(--navy);color:#dbe8f8;letter-spacing:.07em}
+.preview-note span{color:var(--orange)}
+.site-header{background:rgba(238,244,252,.86);border-bottom:1px solid var(--line)}
+.header-inner nav{font-size:13.5px;font-weight:600}
+.header-join{border-color:var(--navy);color:var(--navy);background:rgba(255,255,255,.55);font-weight:600}
+.header-join:hover{background:var(--navy);color:#fff}
+
+/* chữ */
+h1{font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.intro-label,.rct-story-tag,.tag,.board-label,.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--orange-dark)}
+.section-heading h2,.community-layout h2{font-size:22px;line-height:1.1;font-weight:600;letter-spacing:0;color:var(--ink);display:flex;align-items:center;gap:10px}
+.project-body h3,.rct-story h3{font-weight:600;letter-spacing:-.005em;color:var(--ink)}
+.project-body p,.rct-story p,.lab-summary p,.about-copy p{color:#2b3645}
+a.lk,.rct-story-link{color:var(--orange-dark);font-weight:600}
+a.lk{text-decoration:none;border-bottom:1px solid currentColor}
+a.lk:hover{opacity:.7}
+.project-timeline{font-family:Consolas,monospace;color:var(--navy);font-weight:600}
+
+/* nền: các khối trong suốt để thấy duotone, thẻ trắng mờ */
+.news-section,.research-section,.community-section{background:transparent;border-color:transparent}
+.project-card,.about-card,.community-board,.rct-story{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 0 rgba(22,60,108,.04)}
+.about-card{padding:22px}
+.site-footer{border-top:1px solid var(--line)}
+
+/* News theo mẫu: ngày mono xanh, vạch trái xanh, thẻ bo viền xanh nhạt */
+.news-brief-list{list-style:none;margin:0;padding:12px;background:#fff;border:1px solid #9fc2f0;border-radius:16px}
+.dated-news{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:baseline;padding:18px 20px;border-left:3px solid #1f6fd6;background:linear-gradient(90deg,rgba(225,236,249,.7),rgba(255,255,255,0) 55%)}
+.dated-news time{font:600 13px Consolas,"SFMono-Regular",monospace;color:#1f6fd6;white-space:nowrap}
+.dated-news p{font-size:15px;line-height:1.55;color:var(--ink)}
+.dated-news strong{font-weight:700}
+
+/* icon mục lớn: ô trắng viền navy nghiêng nhẹ, hình đặc, màu navy/xanh sáng/cam */
+.section-icon{width:40px;height:40px;border-radius:12px;background:#fff;border:2px solid var(--navy);color:var(--navy);font-size:0;box-shadow:3px 3px 0 var(--orange);transform:rotate(-5deg);transition:transform .25s}
+.section-heading:hover .section-icon,.community-layout h2:hover .section-icon{transform:rotate(4deg) scale(1.08)}
+.section-icon .ico{width:26px;height:26px;overflow:visible}
+.ico .f1{fill:var(--navy)}.ico .f2{fill:#72afe1;stroke:none}.ico .f3{fill:#fff}
+.ico .acc{fill:var(--orange);stroke:none}
+.ico .rays,.ico .spark{fill:none;stroke:var(--orange)}
+.ico .acc.spark{stroke:var(--orange)}
+.ico-news .mega{transform-origin:8px 16px;animation:mega 2.8s ease-in-out infinite}
+.ico-news .spark{animation:blink 1.4s ease-in-out infinite}
+.ico-rocket .rk{transform-origin:16px 16px;animation:fly 2.4s ease-in-out infinite}
+.ico-rocket .flame{transform-origin:16px 24px;animation:flame .5s ease-in-out infinite alternate}
+.ico-cup .cup{transform-origin:16px 28px;animation:hop 2.6s ease-in-out infinite}
+.ico-cup .star{transform-origin:16px 11px;animation:spin 6s linear infinite}
+.ico-bulb .bulb path{animation:glow 2.4s ease-in-out infinite}
+.ico-bulb .rays{animation:blink 2.4s ease-in-out infinite}
+.ico-people .pp{transform-origin:16px 28px;animation:sway 3s ease-in-out infinite}
+.focus-icon svg{animation:bob 4s ease-in-out infinite}
+@keyframes mega{0%,70%,100%{transform:rotate(0)}80%{transform:rotate(-8deg)}90%{transform:rotate(5deg)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes fly{0%,100%{transform:translateY(1px) rotate(-3deg)}50%{transform:translateY(-2px) rotate(3deg)}}
+@keyframes flame{from{transform:scaleY(.7)}to{transform:scaleY(1.25)}}
+@keyframes hop{0%,60%,100%{transform:translateY(0)}75%{transform:translateY(-3px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glow{0%,100%{fill:#163c6c}50%{fill:#e9803d}}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@media (prefers-reduced-motion:reduce){.ico *,.focus-icon svg{animation:none!important}.section-icon{transition:none}}
+
+/* tiêu đề mục: đậm, đen */
+.intro-label,.bio-heading h2,.section-heading h2,.community-layout h2{color:#0d1117;font-weight:700}
+.intro-label,.bio-heading h2{font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+.section-heading h2,.community-layout h2{font-size:22px}
+
+/* hộp giới thiệu lab giống hộp cá nhân, cùng cỡ chữ */
+.lab-summary{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 1px 0 rgba(22,60,108,.04)}
+.lab-summary h1{font-size:22px;line-height:1.3;font-weight:600;margin:4px 0 8px}
+.lab-summary .intro-copy p{font-size:13px;line-height:1.95;color:#46546a}
+.lab-summary .intro-label{margin:0}
+.focus-card li{font-size:13px}
+.focus-card h2{font-size:15px}
+
+/* khoảng cách gọn hơn */
+main>section.rct-intro{padding-block:26px 8px}
+main>section.section,main>section.research-section,main>section.community-section,main>section.news-brief-section{padding-block:14px}
+.section-heading{margin-bottom:12px}
+.community-layout{gap:24px}
+
+/* On-going work: thẻ chữ, không ảnh */
+.rct-story.story-text{display:block;padding:20px 24px;border-left:4px solid var(--orange)}
+.story-text .rct-story-content{padding:0}
+.story-text h3{font-size:20px;margin:4px 0 6px}
+
+@media (max-width:640px){
+  .dated-news{grid-template-columns:1fr;gap:4px;padding:14px 14px}
+  .dated-news time{font-size:12px}
+}
+
+/* nhãn giới thiệu màu cam */
+.intro-label,.bio-heading h2{color:#e07328}
+
+/* On-going work: tag bên trái như ngày của News */
+.story-date{font:600 12px Consolas,"SFMono-Regular",monospace;color:#1f6fd6;line-height:1.5}
+.story-body h3{font-size:18px;font-weight:600;margin:0 0 4px;color:var(--ink)}
+.story-body p{font-size:15px;line-height:1.55;margin:0;color:var(--ink)}
+
+/* Member: Simulation box + Student community */
+.community-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:20px;align-items:stretch}
+.sim-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;min-height:180px}
+.sim-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#0d1117}
+.sim-soon{flex:1;display:grid;place-items:center;font-size:22px;font-weight:600;color:var(--navy)}
+.board-label{font:700 11px "Segoe UI",Inter,system-ui,sans-serif;text-transform:none;letter-spacing:.02em;color:#0d1117;padding-bottom:10px}
+.community-tile h3{font-size:15px;font-weight:600}
+.community-tile p{font-size:13px;line-height:1.6;color:#46546a}
+.board-foot{font-size:12px}
+@media (max-width:900px){.community-layout{grid-template-columns:1fr}}
+
+/* lượt chỉnh: chữ đậm, nhãn Member cam in hoa có gạch dưới */
+.bio-heading h3,.lab-summary h1{font-weight:700}
+.sim-label,.board-label{font:700 11px "Segoe UI",Inter,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:#e07328;padding-bottom:12px}
+.sim-label{border-bottom:1px solid #ced5df}
+
+/* ===== Đồng bộ chữ: cùng cấp cùng kiểu (theo site tin sáng: Segoe UI, tiêu đề 600–700, nhãn 11px in hoa .07em) ===== */
+:root{--tag:#b4531f;--body:#2b3645;--shadow:0 1px 2px rgba(22,60,108,.05),0 6px 18px rgba(22,60,108,.06)}
+/* cấp 1: nhãn nhỏ */
+.intro-label,.bio-heading h2,.rct-story-tag,.project-body .tag,.sim-label,.board-label{font:700 11px/1.4 "Segoe UI",Inter,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--tag);background:none;padding:0;border-radius:0}
+/* cấp 2: tiêu đề hộp lớn */
+.bio-heading h3,.lab-summary h1{font-size:22px;line-height:1.3;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+/* cấp 3: tiêu đề thẻ */
+.project-body h3,.rct-story-content h3,.story-body h3{font-size:18px;line-height:1.35;font-weight:600;letter-spacing:-.005em;margin:6px 0 8px;color:var(--ink)}
+.project-body h3 button{font:inherit;color:inherit;text-align:left}
+.community-tile h3,.focus-card h2{font-size:15.5px;font-weight:600;letter-spacing:0}
+/* cấp 4: chữ thân */
+.about-copy p,.lab-summary .intro-copy p,.project-body p,.rct-story-content p,.story-body p,.community-tile p,.focus-card li,.dated-news p,.bio-heading p{font-size:14px;line-height:1.65;color:var(--body)}
+.project-body p{min-height:0}
+.bio-heading p{color:var(--muted)}
+/* ngày/nhãn cột trái */
+.dated-news time,.story-date{font:600 12.5px/1.5 Consolas,"SFMono-Regular",monospace;color:#1f6fd6}
+/* link */
+.rct-story-link,a.lk{color:var(--tag);font-weight:600;font-size:14px;text-decoration:none;border-bottom:1px solid currentColor;padding:0;gap:6px}
+.rct-story-link:hover,a.lk:hover{opacity:.7;color:var(--tag)}
+/* thẻ: cùng viền, bo góc, bóng */
+.project-card,.about-card,.lab-summary,.community-board,.sim-box,.rct-story,.news-brief-list{border-color:var(--line);box-shadow:var(--shadow)}
+
+/* ===== Icon: một hệ duy nhất (ô trắng bo góc, hình đặc navy/xanh/cam) ===== */
+.focus-icon{width:34px;height:34px;border-radius:9px;background:#fff;display:grid;place-items:center;flex-shrink:0;box-shadow:2px 2px 0 var(--orange)}
+.focus-icon .ico{width:24px;height:24px;overflow:visible}
+.focus-icon svg{animation:none}
+.ico-iot .w1{animation:blink 2.4s ease-in-out infinite}
+.ico-iot .w2{animation:blink 2.4s ease-in-out infinite .4s}
+.ico-arm .arm{transform-origin:11px 25px;animation:sway 3s ease-in-out infinite}
+.ico-chip .spark{transform-origin:16px 15.5px;animation:spin 8s linear infinite}
+.tile-symbol{width:34px;height:34px;border-radius:9px;background:#fff;border:2px solid var(--navy);display:grid;place-items:center;box-shadow:2px 2px 0 var(--orange);font-size:0}
+.tile-symbol .ico{width:22px;height:22px}
+@media (prefers-reduced-motion:reduce){.ico-iot *,.ico-arm *,.ico-chip *{animation:none!important}}
+
+/* ===== Material: clip 50%, chữ 50% ===== */
+.material-story{align-items:stretch}
+@media (min-width:701px){#teaching .material-story{grid-template-columns:1fr 1fr}}
+.clip-media{position:relative;padding:0;min-height:0;background:#e8f0fa;align-self:stretch}
+.clip-media video{display:block;width:100%;height:100%;aspect-ratio:3/2;object-fit:contain}
+.clip-toggle{position:absolute;right:12px;bottom:12px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);border:2px solid var(--navy);color:var(--navy);font-size:12px;display:grid;place-items:center;box-shadow:2px 2px 0 var(--orange)}
+.clip-toggle:hover{background:#fff}
+.motion-list{list-style:none;margin:2px 0 12px;padding:0;display:grid;gap:6px}
+.motion-list li{display:grid;grid-template-columns:118px 1fr;gap:10px;font-size:14px;line-height:1.5;color:var(--body);padding:6px 10px;border-radius:8px;background:#f3f7fc}
+.motion-list b{font-weight:600;color:var(--ink)}
+@media (max-width:420px){.motion-list li{grid-template-columns:1fr;gap:0}}
+#home .about-copy p{font-size:14px;line-height:1.65;color:var(--body)}
+
+/* tiêu đề thẻ màu navy; danh sách nhiều mục Material */
+.bio-heading h3,.lab-summary h1,.project-body h3,.project-body h3 button,.rct-story-content h3,.story-body h3,.community-tile h3{color:var(--navy)}
+#teaching .rct-story-list{display:grid;gap:18px}
+.project-footer{justify-content:flex-end}
+/* hai nhãn giới thiệu: cùng một kiểu, đậm hơn */
+.intro-label,.bio-heading h2{font-size:12px;font-weight:800;letter-spacing:.08em}
