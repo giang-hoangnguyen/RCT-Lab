@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163c6c">
+  <title>Quadrotor di chuyển như thế nào? · RCT Lab</title>
+  <link rel="icon" type="image/svg+xml" href="assets/rct-network-icon.svg">
+  <style>
+    :root{--navy:#163c6c;--ink:#171c23;--body:#2b3645;--muted:#566577;--line:#c9d8ec;--card:rgba(255,255,255,.78);--orange:#e9803d;--tag:#b4531f;--blue:#1f6fd6;
+      --shadow:0 1px 2px rgba(22,60,108,.05),0 6px 18px rgba(22,60,108,.06)}
+    *{box-sizing:border-box}
+    html{background:#e6effa}
+    body{margin:0;background:linear-gradient(160deg,#d3e3f7 0%,#e6effa 36%,#fde9d6 66%,#fbcfa3 100%);background-attachment:fixed;color:var(--ink);font:15px/1.6 "Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    main{max-width:880px;margin:0 auto;padding:22px 20px 56px}
+    a.back{display:inline-block;color:var(--navy);font-weight:600;text-decoration:none;font-size:14px;margin-bottom:14px}
+    a.back:hover{color:var(--tag)}
+    .tag{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tag)}
+    h1{color:var(--navy);font-size:clamp(26px,4.4vw,36px);line-height:1.15;font-weight:700;margin:4px 0 8px;letter-spacing:-.01em}
+    .lede{color:var(--muted);font-size:16px;margin:0 0 18px}
+    h2{font-size:20px;line-height:1.25;font-weight:700;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+    h2 .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--navy);color:#fff;font-size:14px;flex-shrink:0;box-shadow:2px 2px 0 var(--orange)}
+    h3{font-size:15.5px;font-weight:600;margin:12px 0 4px}
+    p,li{color:var(--body)}
+    p{margin:0 0 10px}
+    ul{margin:0 0 10px;padding-left:20px}
+    li{margin-bottom:4px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;margin-top:14px}
+    .clip{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#e8f0fa}
+    .clip video{display:block;width:100%;height:auto;aspect-ratio:3/2}
+    table{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0 4px}
+    th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;text-align:center;padding:7px 6px;border-bottom:1px solid var(--line)}
+    th:first-child,td:first-child{text-align:left}
+    td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+    tr:last-child td{border-bottom:0}
+    .p{color:#c4581f;font-weight:700}.m{color:var(--navy);font-weight:700}.z{color:#8a96a6;font-weight:700}
+    .eq{font:600 14px/1.9 Consolas,"SFMono-Regular",monospace;color:var(--navy);background:#f3f7fc;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:6px 0 10px;overflow-x:auto;white-space:pre}
+    .note{border-left:3px solid var(--orange);background:#fff7ef;border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0 2px}
+    .scroll{overflow-x:auto}
+    @media (max-width:560px){main{padding:16px 16px 40px}.card{padding:16px}td,th{padding:6px 4px}}
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html#teaching">← RCT Lab · Tài liệu</a>
+  <span class="tag">Nguyên lý / Quadrotor</span>
+  <h1>Quadrotor di chuyển như thế nào?</h1>
+  <p class="lede">Quadrotor không có cánh lái hay bánh lái. Mọi chuyển động đều đến từ việc cho bốn cánh quạt quay nhanh, chậm khác nhau.</p>
+
+  <figure class="clip"><video id="clip" muted loop playsinline preload="metadata" controls poster="assets/quadrotor-clip-poster.png" aria-label="Clip minh họa tốc độ bốn cánh quạt quyết định chuyển động của quadrotor"><source src="assets/quadrotor-clip.mp4" type="video/mp4"><source src="assets/quadrotor-clip.webm" type="video/webm"></video></figure>
+
+  <section class="card">
+    <h2><span class="n">1</span>Cấu tạo và chiều quay</h2>
+    <p>Trang này dùng khung chữ X, nhìn từ trên, mũi hướng lên. Động cơ đánh số theo chiều kim đồng hồ:</p>
+    <ul>
+      <li><b>1:</b> trước trái, <b>2:</b> trước phải, <b>3:</b> sau phải, <b>4:</b> sau trái.</li>
+      <li><b>1 và 3</b> quay thuận chiều kim đồng hồ; <b>2 và 4</b> quay ngược chiều kim đồng hồ.</li>
+    </ul>
+    <p>Hai cặp chéo quay ngược nhau để mô-men xoắn của chúng triệt tiêu khi bốn quạt quay đều. Nếu cả bốn quạt cùng chiều, thân sẽ tự xoay liên tục.</p>
+    <div class="note">Cách đánh số và chiều quay khác nhau giữa các firmware điều khiển bay. Khi lắp thật, luôn theo sơ đồ động cơ của firmware đang dùng.</div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">2</span>Mỗi cánh quạt tạo ra gì</h2>
+    <p>Một cánh quạt quay với tốc độ góc ω tạo ra hai đại lượng, xấp xỉ tỉ lệ với bình phương tốc độ:</p>
+    <div class="eq">lực đẩy      T = k_T · ω²     (hướng lên, dọc trục động cơ)
+mô-men phản  Q = k_Q · ω²     (xoắn thân ngược chiều quay của quạt)</div>
+    <p>k_T, k_Q là hằng số của bộ cánh và động cơ, đo được bằng thử nghiệm trên bàn đo lực. Quay nhanh hơn thì lực đẩy và mô-men phản đều tăng.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">3</span>Bốn chuyển động cơ bản</h2>
+    <p><span class="p">+</span> là quay nhanh hơn mức lơ lửng, <span class="m">−</span> là chậm hơn, <span class="z">0</span> là giữ nguyên.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Chuyển động</th><th>1</th><th>2</th><th>3</th><th>4</th><th>Lý do</th></tr></thead>
+      <tbody>
+        <tr><td>Lên</td><td class="p">+</td><td class="p">+</td><td class="p">+</td><td class="p">+</td><td style="text-align:left">tổng lực đẩy lớn hơn trọng lực</td></tr>
+        <tr><td>Tiến (chúi mũi)</td><td class="m">−</td><td class="m">−</td><td class="p">+</td><td class="p">+</td><td style="text-align:left">phía sau nâng lên, lực đẩy nghiêng về trước</td></tr>
+        <tr><td>Sang phải (nghiêng phải)</td><td class="p">+</td><td class="m">−</td><td class="m">−</td><td class="p">+</td><td style="text-align:left">bên trái nâng lên, lực đẩy nghiêng sang phải</td></tr>
+        <tr><td>Xoay phải</td><td class="m">−</td><td class="p">+</td><td class="m">−</td><td class="p">+</td><td style="text-align:left">mô-men phản của 2, 4 thắng 1, 3</td></tr>
+      </tbody>
+    </table></div>
+    <p>Đổi toàn bộ dấu thì quad đi theo chiều ngược lại. Khi nghiêng hay xoay, một nhóm tăng bao nhiêu thì nhóm kia giảm bấy nhiêu, nên tổng lực đẩy giữ nguyên và quad không bị tụt hay vọt độ cao.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">4</span>Bộ trộn tín hiệu (mixer)</h2>
+    <p>Bộ điều khiển tính bốn lệnh: ga T, nghiêng R (dương là nghiêng phải), chúc P (dương là chúi mũi đi tới), xoay Y (dương là xoay phải nhìn từ trên). Bộ trộn đổi bốn lệnh đó ra lệnh cho từng động cơ:</p>
+    <div class="eq">động cơ 1 = T + R − P − Y
+động cơ 2 = T − R − P + Y
+động cơ 3 = T − R + P − Y
+động cơ 4 = T + R + P + Y</div>
+    <p>Mỗi hàng của bảng ở mục 3 chính là một cột của ma trận này. Kiểm tra nhanh: cộng bốn dòng, R, P, Y đều triệt tiêu, chỉ còn 4T.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">5</span>Vì sao muốn đi tới phải nghiêng</h2>
+    <p>Lực đẩy luôn vuông góc với mặt phẳng cánh quạt. Khi thân nằm ngang, lực đẩy chỉ hướng lên, không có thành phần ngang để đẩy quad đi. Quad phải nghiêng một góc θ; khi đó lực đẩy tổng T tách thành:</p>
+    <div class="eq">thành phần đứng  = T · cos θ   (giữ độ cao)
+thành phần ngang = T · sin θ   (đẩy quad đi)</div>
+    <p>Vì cos θ nhỏ hơn 1, khi nghiêng cần tăng ga một chút để không mất độ cao. Muốn dừng lại, quad phải nghiêng ngược về phía sau để hãm.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">6</span>Bài toán điều khiển</h2>
+    <p>Quad có 6 bậc tự do (3 tịnh tiến, 3 quay) nhưng chỉ có 4 đầu vào là tốc độ 4 động cơ. Không thể điều khiển trực tiếp vị trí ngang; phải đi qua góc nghiêng. Vì vậy bộ điều khiển thường chia hai vòng:</p>
+    <ul>
+      <li><b>Vòng trong (tư thế):</b> giữ góc nghiêng, góc chúc và góc xoay theo giá trị đặt, đọc từ cảm biến quán tính (IMU), chạy rất nhanh.</li>
+      <li><b>Vòng ngoài (vị trí, độ cao):</b> tính góc nghiêng và lực đẩy cần có để tới vị trí mong muốn, rồi giao cho vòng trong.</li>
+    </ul>
+    <p>Bốn động cơ được điều khiển độc lập nhưng phối hợp, liên tục bù cho trọng lực, gió, nhiễu cảm biến và sai lệch giữa các động cơ. Cách đơn giản nhất là một bộ PID cho mỗi trục; các phương pháp như LQR hay điều khiển trượt cũng được dùng khi cần đáp ứng tốt hơn.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">7</span>Lưu ý khi lắp và chạy thử</h2>
+    <ul>
+      <li>Cánh quạt có loại quay thuận và quay ngược; lắp đúng loại cho từng động cơ, nếu không quạt sẽ đẩy xuống.</li>
+      <li>Kiểm tra số thứ tự và chiều quay từng động cơ khi <b>chưa lắp cánh</b>.</li>
+      <li>Nghiêng tay quad về một phía khi chưa lắp cánh: động cơ phía bị hạ thấp phải tăng tốc. Nếu ngược lại, kiểm tra dấu trong bộ trộn hoặc hướng lắp bộ điều khiển bay.</li>
+      <li>Quad tự xoay khi cất cánh: thường do lắp sai chiều quay hoặc sai loại cánh ở một cặp động cơ.</li>
+      <li>Chạy thử lần đầu ở nơi thoáng, có lưới hoặc dây giữ, tránh xa người.</li>
+    </ul>
+  </section>
+</main>
+<script>
+  // Clip tự phát không tiếng khi cuộn tới, trừ khi người xem bật giảm chuyển động
+  (function () {
+    var v = document.getElementById('clip');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!v || reduce || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
+    }, { threshold: .35 }).observe(v);
+  })();
+</script>
+</body>
+</html>
