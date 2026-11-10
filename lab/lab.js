@@ -1,6 +1,6 @@
 /* Phòng lab RCT: lịch mỗi người bốc theo seed (ngày + id), nhân vật đi bộ bằng BFS trên lưới 16 px. */
 (async () => {
-const CFG = await fetch('config.json').then(r => r.json());
+const CFG = await fetch('config.json?v=2').then(r => r.json());
 const { OUT: O, buildChar, icon, paint } = window.SPR;
 
 /* ---------- Seed và bốc theo trọng số ---------- */
@@ -23,42 +23,37 @@ const labKey = ms => new Date(ms - START * 60000).toISOString().slice(0, 10);
 const labMin = ms => (((ms - START * 60000) % DAY) + DAY) % DAY / 60000;
 const rel = s => ((toMin(s) - START) % 1440 + 1440) % 1440;
 const relTo = s => rel(s) || 1440;
-const weekday = day => new Date(day + 'T00:00:00Z').getUTCDay();
 
-/* ---------- Kế hoạch trong ngày ---------- */
+/* ---------- Ai có mặt trong mỗi ca (seed = ngày + số ca, ai mở trang cũng thấy giống nhau) ---------- */
+const BLOCK = CFG.blockMinutes || 40;
+const STUDENTS = CFG.people.filter(p => p.role !== 'PI');
 const cache = new Map();
-function planFor(p, day) {
-  const k = day + '|' + p.id;
+function rosterFor(day, b) {
+  const k = day + '|' + b;
   if (cache.has(k)) return cache.get(k);
-  const r = rng(hash(k));
-  let plan;
-  if ((CFG.closedDays || []).includes(weekday(day))) plan = { tpl: 'Lab nghỉ', slots: [{ from: CFG.dayStart, to: CFG.dayStart, act: 'vang', variant: 0 }] };
-  else if (r() * 100 < (p.absentRate || 0)) plan = { tpl: 'Vắng cả ngày', slots: [{ from: CFG.dayStart, to: CFG.dayStart, act: 'vang', variant: 0 }] };
-  else {
-    const tk = pick(p.templates, r), tpl = CFG.templates[tk];
-    plan = { tpl: tpl.label || tk, slots: tpl.slots.map(s => {
-      const act = pick(s.weights, r), vs = CFG.actions[act].variants;
-      const variant = +pick(Object.fromEntries(vs.map((v, i) => [i, v.w ?? 1])), r);
-      return { from: s.from, to: s.to, act, variant };
-    }) };
-  }
+  const r = rng(hash(k)), list = [];
+  if (CFG.people.some(p => p.role === 'PI') && r() * 100 < CFG.piRate) list.push(CFG.people.find(p => p.role === 'PI'));
+  const n = Math.min(STUDENTS.length, +pick(CFG.studentsPresent, r));   // luôn ít nhất 1 sinh viên
+  const pool = [...STUDENTS];
+  for (let i = 0; i < n; i++) list.push(pool.splice(Math.floor(r() * pool.length), 1)[0]);
+  const plan = list.map(p => {
+    const act = pick(CFG.roles[p.role], r), vs = CFG.actions[act].variants;
+    return { p, act, variant: +pick(Object.fromEntries(vs.map((v, i) => [i, v.w ?? 1])), r) };
+  });
   cache.set(k, plan);
   return plan;
 }
-const inRange = (m, from, to) => rel(from) <= m && m < relTo(to);
-const currentSlot = (plan, m) => plan.slots.find(s => inRange(m, s.from, s.to)) || { act: 'vang', variant: 0 };
-const eventsAt = (day, m) => (CFG.events || []).filter(e => !(CFG.closedDays || []).includes(weekday(day)) && e.days.includes(weekday(day)) && inRange(m, e.from, e.to));
-const presentToday = (p, day) => planFor(p, day).slots.length > 1; // người vắng cả ngày không bị kéo vào sự kiện
+const blockOf = m => Math.floor(m / BLOCK);
 
 /* ---------- Bố cục phòng (px, khung 320x208, ô 16 px) ---------- */
 const W = 320, H = 208, TS = 16;
 const SPOTS = {
-  desk_A:      { label: 'Bàn A',          seats: [{ x: 64, y: 94, dir: 'up', pose: 'sit' }] },
+  desk_SV:     { label: 'Bàn sinh viên',  seats: [{ x: 56, y: 94, dir: 'up', pose: 'sit' }, { x: 88, y: 94, dir: 'up', pose: 'sit' }] },
   desk_PI:     { label: 'Bàn PI',         seats: [{ x: 248, y: 94, dir: 'up', pose: 'sit' }] },
   may_in:      { label: 'Máy in 3D',      seats: [{ x: 264, y: 124, dir: 'right' }] },
   ban_lap_rap: { label: 'Bàn lắp ráp',    seats: [{ x: 264, y: 156, dir: 'right' }] },
   sofa:        { label: 'Sofa',           seats: [{ x: 96, y: 162, dir: 'down', pose: 'sitdown' }, { x: 112, y: 162, dir: 'down', pose: 'sitdown' }] },
-  tu_sach:     { label: 'Tủ sách',        seats: [{ x: 34, y: 58, dir: 'up' }, { x: 52, y: 58, dir: 'up' }] },
+  tu_sach:     { label: 'Tủ sách',        seats: [{ x: 28, y: 56, dir: 'up' }, { x: 44, y: 56, dir: 'up' }] },
   bang_trang:  { label: 'Bảng trắng',     seats: [{ x: 144, y: 46, dir: 'up' }, { x: 176, y: 46, dir: 'up' }] },
   canh_ban_PI: { label: 'Cạnh bàn PI',    seats: [{ x: 214, y: 100, dir: 'right' }] },
   pantry:      { label: 'Góc cà phê',     seats: [{ x: 44, y: 140, dir: 'left' }, { x: 44, y: 124, dir: 'left' }] },
@@ -69,7 +64,7 @@ const SPOTS = {
 const blocked = new Set();
 const block = (c0, c1, r0, r1) => { for (let c = c0; c <= c1; c++) for (let r = r0; r <= r1; r++) blocked.add(c + ',' + r); };
 block(1, 2, 2, 2);    // tủ sách
-block(3, 5, 4, 4); block(3, 3, 5, 5); block(5, 5, 5, 5);       // bàn A, chừa ô ghế (4,5)
+block(2, 6, 4, 4); block(2, 2, 5, 5); block(4, 4, 5, 5); block(6, 6, 5, 5); // bàn SV, chừa ô ghế (3,5) và (5,5)
 block(14, 16, 4, 4); block(14, 14, 5, 5); block(16, 16, 5, 5); // bàn PI, chừa ô ghế (15,5)
 block(17, 18, 2, 2);  // chậu cây góc phải
 block(17, 18, 6, 10); // bàn thiết bị
@@ -100,33 +95,27 @@ const PEOPLE = [...CFG.people].sort((a, b) => (b.role === 'PI') - (a.role === 'P
 const spotOf = (name, p) => name === 'ban_rieng' ? 'desk_' + p.desk : name;
 function resolveAll(ms) {
   const day = labKey(ms), m = labMin(ms), occ = {}, out = {};
-  const evs = eventsAt(day, m);
+  const plan = rosterFor(day, blockOf(m));
   for (const p of PEOPLE) {
-    let act, variant = 0, seatIdx = null;
-    const ev = presentToday(p, day) ? evs.find(e => e.who.includes(p.id)) : null;
-    if (ev) { act = ev.act; seatIdx = ev.who.indexOf(p.id); }
-    else { const s = currentSlot(planFor(p, day), m); act = s.act; variant = s.variant; }
-    let A = CFG.actions[act];
+    const it = plan.find(x => x.p.id === p.id);
+    if (!it) { out[p.id] = { act: null, spot: 'door', seat: SPOTS.door.seats[0], key: 'door', pose: 'stand' }; continue; }
+    let act = it.act, variant = it.variant, A = CFG.actions[act];
     if (A.needsPI) {
       const pi = PEOPLE.find(q => q.role === 'PI'), piNow = pi && out[pi.id];
       if (!piNow || piNow.spot !== 'desk_' + pi.desk) { act = A.fallback; A = CFG.actions[act]; variant = 0; }
     }
     const v = A.variants[variant] || A.variants[0];
-    let spot = spotOf(v.spot, p);
+    let spot = spotOf(v.spot, p), seat;
     if (!SPOTS[spot]) spot = 'san';
-    let seat;
-    if (spot === 'door') seat = 0;
-    else if (seatIdx !== null && seatIdx < SPOTS[spot].seats.length) seat = seatIdx;
-    else {
-      const n = occ[spot] || 0;
-      if (n < SPOTS[spot].seats.length) seat = n; else { spot = 'san'; seat = Math.min(occ.san || 0, 1); }
-    }
+    const n = occ[spot] || 0;
+    if (n < SPOTS[spot].seats.length) seat = n;
+    else { act = 'viet_bang'; spot = (occ.bang_trang || 0) < 2 ? 'bang_trang' : 'san'; seat = Math.min(occ[spot] || 0, SPOTS[spot].seats.length - 1); }
     occ[spot] = (occ[spot] || 0) + 1;
     const st = SPOTS[spot].seats[seat];
     let pose = st.pose || 'stand';
     if (pose === 'sit') pose = v.pose === 'sleep' ? 'sleep' : v.pose === 'type' ? 'type' : 'sit';
     if (pose === 'sitdown' && v.pose === 'read') pose = 'read';
-    out[p.id] = { act, spot, seat: st, key: spot + ':' + seat + ':' + act, pose, event: ev?.label };
+    out[p.id] = { act, spot, seat: st, key: spot + ':' + seat + ':' + act, pose };
   }
   return out;
 }
@@ -322,11 +311,12 @@ function render(now, res) {
   clock(214, 9, simMs);
   const at = spot => chars.find(c => !c.hidden && !c.path.length && c.final && c.final.spot === spot);
   const busyPrint = !!at('may_in'); if (busyPrint) printProg = Math.min(1, printProg + 0.0006); else if (printProg >= 1) printProg = 0;
-  const onA = at('desk_A'), onPI = at('desk_PI');
+  const typing = (spot, x) => chars.some(c => !c.hidden && !c.path.length && c.final && c.final.spot === spot && c.final.seat.x === x && c.pose === 'type');
+  const onPI = at('desk_PI');
   const items = [
     { y: 44, d: () => bookshelf(18, 4) },
-    { y: 83, d: () => { desk(44, 60, 40); monitor(56, 54, onA && onA.pose === 'type', t);
-        R(48, 64, 8, 6, O); R(49, 65, 6, 4, '#2f7a4a'); R(51, 66, 2, 2, '#1d2436'); R(74, 64, 4, 4, O); R(75, 65, 2, 2, '#e9803d'); } },
+    { y: 83, d: () => { desk(40, 60, 64); monitor(48, 54, typing('desk_SV', 56), t); monitor(80, 54, typing('desk_SV', 88), t + 0.7);
+        R(66, 64, 8, 6, O); R(67, 65, 6, 4, '#2f7a4a'); R(69, 66, 2, 2, '#1d2436'); R(43, 65, 4, 4, O); R(44, 66, 2, 2, '#e9803d'); } },
     { y: 83, d: () => { desk(220, 60, 56); monitor(232, 54, onPI && onPI.pose === 'type', t + 0.5); monitor(250, 54, onPI && onPI.pose === 'type', t + 1.3);
         R(224, 64, 6, 8, '#fbf4e2'); R(224, 64, 6, 1, '#d8cfb8'); R(225, 66, 4, 1, '#9aa7b8'); R(268, 63, 5, 5, O); R(269, 64, 3, 3, '#ffffff'); R(269, 64, 3, 1, '#7b4a2a'); } },
     { y: 50, d: () => plant(285, 30) },
@@ -335,7 +325,8 @@ function render(now, res) {
     { y: 160, d: () => sofa(80, 136) },
     { y: 184, d: () => table(88, 172) },
     { y: 190, d: () => plant(190, 172) },
-    { y: 95, d: () => chair(64, 95) },
+    { y: 95, d: () => chair(56, 95) },
+    { y: 95, d: () => chair(88, 95) },
     { y: 95, d: () => chair(248, 95) }
   ];
   const vis = chars.filter(c => !c.hidden);
@@ -385,23 +376,14 @@ cv.addEventListener('click', e => {
 });
 setSpeed(speed);
 
-const spotLabel = (name, p) => SPOTS[spotOf(name, p)]?.label || '';
-function renderSchedule(res) {
-  const day = labKey(simMs), m = labMin(simMs);
-  const sig = day + '|' + PEOPLE.map(p => res[p.id].key).join(',') + '|' + selected;
+// danh sách ai đang có mặt và đang làm gì, mỗi người một dòng
+function renderNow(res) {
+  const here = chars.filter(c => !c.hidden && res[c.p.id].act);
+  const sig = here.map(c => c.p.id + ':' + res[c.p.id].act + ':' + (c.path.length ? 'w' : '')).join(',') + '|' + selected;
   if (sig === lastSig) return; lastSig = sig;
-  const [y, mo, d] = day.split('-');
-  $('schedTitle').textContent = `Lịch ngày ${d}/${mo}/${y}`;
-  const evToday = (CFG.events || []).filter(e => e.days.includes(weekday(day)) && !(CFG.closedDays || []).includes(weekday(day)));
-  $('sched').innerHTML = CFG.people.map(p => {
-    const plan = planFor(p, day), cur = currentSlot(plan, m), now = res[p.id];
-    const chips = plan.slots.filter(s => s.act !== 'vang' || plan.slots.length === 1).map(s => {
-      const A = CFG.actions[s.act], where = s.act === 'vang' ? '' : ' · ' + spotLabel(A.variants[s.variant].spot, p);
-      return `<li class="chip${s === cur && !now.event ? ' now' : ''}"><time>${s.from}–${s.to}</time>${A.label}${where}</li>`;
-    }).join('') + evToday.filter(e => e.who.includes(p.id) && presentToday(p, day)).map(e => `<li class="chip ev${now.event === e.label ? ' now' : ''}"><time>${e.from}–${e.to}</time>${e.label}</li>`).join('');
-    const nowLabel = CFG.actions[now.act].label;
-    return `<article class="st${selected === p.id ? ' sel' : ''}"><div class="who"><span class="dot ${p.role === 'PI' ? 'pi' : ''}"></span>
-      <div><b>${p.name}</b><small>${p.role} · ${plan.tpl}</small><small class="nowtxt">Đang: ${nowLabel}</small></div></div><ul class="chips">${chips}</ul></article>`;
+  $('now').innerHTML = here.map(c => {
+    const A = CFG.actions[res[c.p.id].act], doing = c.path.length ? 'đang đi tới chỗ ' + A.label : 'đang ' + A.label;
+    return `<li class="${c.p.role === 'PI' ? 'pi' : ''}${selected === c.p.id ? ' sel' : ''}"><b>${c.p.name}</b><span class="role">${c.p.role}</span><span>${doing}</span></li>`;
   }).join('');
 }
 
@@ -416,11 +398,11 @@ function frame(now) {
   render(now, res);
   uiT += dt;
   if (uiT > 0.2) { uiT = 0; $('clock').textContent = fmtTime(simMs); $('date').textContent = fmtDate(simMs);
-    if (!scrubbing) scrub.value = Math.floor(labMin(simMs)); renderSchedule(res); }
+    if (!scrubbing) scrub.value = Math.floor(labMin(simMs)); renderNow(res); }
   requestAnimationFrame(frame);
 }
 drawStatic();
 await (document.fonts?.ready || Promise.resolve());
 requestAnimationFrame(frame);
-window.__lab = { resolveAll, planFor, CFG, chars, set sim(v) { simMs = v; }, get sim() { return simMs; }, setSpeed };
+window.__lab = { resolveAll, rosterFor, CFG, chars, set sim(v) { simMs = v; }, get sim() { return simMs; }, setSpeed };
 })();

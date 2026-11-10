@@ -87,8 +87,127 @@ const HEADS = {
       '.OHHsSSSSSSESO..',
       '..OHHSSSSSssO...',
       '...OOOOOOOOO....']
+  },
+  triet: {
+    down: [
+      '....O.OOOO.O....',
+      '...OHOHHHHOHO...',
+      '..OHHHHHHHHHHO..',
+      '..OHHHHHHHHHHO..',
+      '.OHHHHHHHhHHHHO.',
+      '.OHhHHSHHHSHhHO.',
+      '.OHSSSSSSSSSSHO.',
+      '.OSSSSSSSSSSSSO.',
+      '.OSSESSSSSSESSO.',
+      '.OsSESSSSSSESsO.',
+      '..OsSSSssSSSsO..',
+      '...OOOOOOOOOO...'],
+    right: [
+      '....O.OOOO......',
+      '...OHOHHHHO.....',
+      '..OHHHHHHHHO....',
+      '..OHHHHHHHHHO...',
+      '.OHHHHHHHHHHHO..',
+      '.OHHHHHHHSHHhO..',
+      '.OHHHHHSSSSSSO..',
+      '.OHHHHHSSSSSSO..',
+      '.OHHsSSSSSSESO..',
+      '.OHHsSSSSSSESO..',
+      '..OHHSSSSSSssO..',
+      '...OOOOOOOOOO...']
+  },
+  khiet: {
+    down: [
+      '....OOOOOOOO....',
+      '...OHHHHHHHHO...',
+      '..OHHHHHHHHHHO..',
+      '..OHhHHHHHHhHO..',
+      '.OHHSSSSSSSSHHO.',
+      '.OHSSSSSSSSSSHO.',
+      '.OSSSSSSSSSSSSO.',
+      '.OSGGGGSSGGGGSO.',
+      '.OSGELGGGGLEGSO.',
+      '.OsGGGGSSGGGGsO.',
+      '..OsSSSssSSSsO..',
+      '...OOOOOOOOOO...'],
+    up: [
+      '....OOOOOOOO....',
+      '...OHHHHHHHHO...',
+      '..OHHHHHHHHHHO..',
+      '..OHhHHHHHHhHO..',
+      '.OHHHHHHHHHHHHO.',
+      '.OHHHHHhHHHHHHO.',
+      '.OHHHHHHHHHHHHO.',
+      '.OHHHHHHHHHHHHO.',
+      '.OsHHHHHHHHHHsO.',
+      '.OsSHHHHHHHHSsO.',
+      '..OsSSSSSSSSsO..',
+      '...OOOOOOOOOO...'],
+    right: [
+      '....OOOOOOO.....',
+      '...OHHHHHHHO....',
+      '..OHHHHHHHHHO...',
+      '..OHHHHHHHHHHO..',
+      '.OHHHHHHSSSSSO..',
+      '.OHHHHSSSSSSSO..',
+      '.OHHSSSSSSSSSO..',
+      '.OHsSSGGGGGGGO..',
+      '.OHsSSSSSGELGO..',
+      '.OHsSSSSSGGGSO..',
+      '..OsSSSSSSssO...',
+      '...OOOOOOOOO....']
+  },
+  anh: {
+    down: [
+      '....OOOOOOOO....',
+      '...OHHHHHHHHO...',
+      '..OHHHHHHHHHHO..',
+      '.OHHHHHHHHHccHO.',
+      '.OHHHHHHHHhHHHO.',
+      '.OHHHHHhHHHHHHO.',
+      '.OHHSSSSSSSSHHO.',
+      '.OHSSSSSSSSSSHO.',
+      '.OHSESSSSSSESHO.',
+      '.OHSESSSSSSESHO.',
+      '.OHHsSSssSSsHHO.',
+      '.OHHOOOOOOOOHHO.'],
+    up: [
+      '....OOOOOOOO....',
+      '...OHHHHHHHHO...',
+      '..OHHHHHHHHHHO..',
+      '.OHHHHHHHHHccHO.',
+      '.OHHHHHHHHHHHHO.',
+      '.OHHHhHHHHHHHHO.',
+      '.OHHHHHHHHHhHHO.',
+      '.OHHHHHHHHHHHHO.',
+      '.OHhHHHHHHHHHHO.',
+      '.OHHHHHHHHHHHHO.',
+      '.OHHHHHhHHHHHHO.',
+      '.OHHHHHHHHHHHHO.'],
+    right: [
+      '....OOOOOOO.....',
+      '...OHHHHHHHO....',
+      '..OHHHHHHHccO...',
+      '..OHHHHHHHHHHO..',
+      '.OHHHHHHHHHHHO..',
+      '.OHHHHHHHHhHHO..',
+      '.OHHHHHHSSSSSO..',
+      '.OHHHHSSSSSSSO..',
+      '.OHHHHSSSSSESO..',
+      '.OHHHHSSSSSESO..',
+      '.OHHHHSSSSssO...',
+      '.OHHHOOOOOOO....'],
+    // tóc dài phủ xuống vai/lưng, vẽ đè lên thân từ hàng 12
+    extra: {
+      down:  ['.OHHO......OHHO.', '..OO........OO..'],
+      up:    ['.OHHHHHHHHHHHHO.', '..OHHHHHHHHHHO..', '...OOOOOOOOOO...'],
+      right: ['.OHHHO..........', '.OHHO...........', '..OO............']
+    }
   }
 };
+// đầu sau gáy và nghiêng dùng chung khi không vẽ riêng
+HEADS.triet.up = HEADS.giang.up;
+HEADS.sang = HEADS.svA;
 
 /* ---------- Thân dùng chung ---------- */
 const BODY = {
@@ -153,27 +272,27 @@ function mirror(src) { const c = mk(src.width, src.height), g = c.getContext('2d
 
 /* Ghép bộ khung cho một nhân vật */
 function buildChar(lookName, pal) {
-  const H = HEADS[lookName];
-  const one = (head, body, legs, headDy = 0) => {
-    const c = mk(16, 22), g = c.getContext('2d');
+  const H = HEADS[lookName], X = H.extra || {};
+  const one = (d, legs) => {
+    const c = mk(16, 22), g = c.getContext('2d'), body = BODY[d];
     const b = legs ? body.slice(0, 6).concat(legs) : body;
-    paint(g, b, pal, 0, 12); paint(g, head, pal, 0, headDy);
+    paint(g, b, pal, 0, 12); paint(g, H[d], pal, 0, 0); if (X[d]) paint(g, X[d], pal, 0, 12);
     return c;
   };
   const F = {};
   for (const d of ['down', 'up', 'right']) {
-    F[d] = { idle: one(H[d], BODY[d]), walk: [one(H[d], BODY[d], LEGS[d][0]), one(H[d], BODY[d]), one(H[d], BODY[d], LEGS[d][1]), one(H[d], BODY[d])] };
+    F[d] = { idle: one(d), walk: [one(d, LEGS[d][0]), one(d), one(d, LEGS[d][1]), one(d)] };
   }
   // hướng phải đi bộ: khung 2 dùng chân bước, khung 4 dùng chân đứng nên đều nhịp
   F.left = { idle: mirror(F.right.idle), walk: F.right.walk.map(mirror) };
   // ngồi quay lưng (bàn làm việc): đầu + 4 hàng thân, ghế che phần dưới
-  const sitUp = (dy) => { const c = mk(16, 18), g = c.getContext('2d'); paint(g, BODY.up.slice(0, 5), pal, 0, 12); paint(g, H.up, pal, 0, dy); return c; };
+  const sitUp = (dy) => { const c = mk(16, 18), g = c.getContext('2d'); paint(g, BODY.up.slice(0, 5), pal, 0, 12); paint(g, H.up, pal, 0, dy); if (X.up) paint(g, X.up, pal, 0, 12 + dy); return c; };
   F.sitUp = sitUp(0); F.sleepUp = sitUp(3);
   // gõ phím: tay nhô lên luân phiên
   F.typeUp = [0, 1].map(k => { const c = sitUp(0), g = c.getContext('2d'); g.fillStyle = pal.S; g.fillRect(k ? 3 : 11, 12, 2, 1); g.fillStyle = OUT; g.fillRect(k ? 3 : 11, 11, 2, 1); return c; });
   // ngồi sofa quay mặt xuống, cầm sách
   const sd = mk(16, 21), sg = sd.getContext('2d');
-  paint(sg, BODY.down.slice(0, 6).concat(SIT_DOWN_LEGS), pal, 0, 12); paint(sg, H.down, pal, 0, 0);
+  paint(sg, BODY.down.slice(0, 6).concat(SIT_DOWN_LEGS), pal, 0, 12); paint(sg, H.down, pal, 0, 0); if (X.down) paint(sg, X.down, pal, 0, 12);
   F.sitDown = sd;
   const sdb = mk(16, 21), sbg = sdb.getContext('2d'); sbg.drawImage(sd, 0, 0); paint(sbg, BOOK.d, BOOK.pal, 0, 13);
   F.readDown = sdb;
