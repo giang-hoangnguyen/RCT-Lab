@@ -105,6 +105,17 @@ main>section.section,main>section.research-section,main>section.community-sectio
 .sim-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;min-height:180px}
 .sim-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#0d1117}
 .sim-soon{flex:1;display:grid;place-items:center;font-size:22px;font-weight:600;color:var(--navy)}
+.sim-frame{margin:14px 0 12px;aspect-ratio:320/208;background:#3b4a6b;border:2px solid #2c2137}
+.sim-frame iframe{display:block;width:100%;height:100%;border:0}
+.sim-open{align-self:flex-start}
+.community-layout{grid-template-columns:3fr 2fr}
+.community-tile>div{min-width:0;flex:1}
+.member-row{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.member-row li{display:flex;align-items:center;gap:6px;min-width:0;font-size:14px;font-weight:600;color:var(--ink)}
+.member-row img{width:32px;height:32px;flex:none;image-rendering:pixelated;background:#e8f0fa;border:2px solid #2c2137}
+.member-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:520px){.member-row li{flex-direction:column;gap:4px}}
+@media (max-width:900px){.community-layout{grid-template-columns:1fr}}
 .board-label{font:700 11px "Segoe UI",Inter,system-ui,sans-serif;text-transform:none;letter-spacing:.02em;color:#0d1117;padding-bottom:10px}
 .community-tile h3{font-size:15px;font-weight:600}
 .community-tile p{font-size:13px;line-height:1.6;color:#46546a}

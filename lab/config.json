@@ -1,0 +1,62 @@
+{
+  "timezone": "Asia/Ho_Chi_Minh",
+  "dayStart": "08:00",
+  "closedDays": [0],
+  "actions": {
+    "lam_viec":  { "label": "Làm việc ở bàn",          "icon": "laptop",  "variants": [ { "spot": "ban_rieng", "pose": "type" } ] },
+    "lap_trinh": { "label": "Lập trình MCU",           "icon": "chip",    "variants": [ { "spot": "ban_rieng", "pose": "type" } ] },
+    "in_3d":     { "label": "In 3D",                   "icon": "printer", "variants": [ { "spot": "may_in" } ] },
+    "lap_rap":   { "label": "Lắp ráp robot",           "icon": "wrench",  "variants": [ { "spot": "ban_lap_rap" } ] },
+    "doc_paper": { "label": "Đọc paper",               "icon": "paper",   "variants": [ { "spot": "sofa", "pose": "read", "w": 2 }, { "spot": "tu_sach", "w": 1 } ] },
+    "viet_bang": { "label": "Viết bảng, nghĩ ý tưởng", "icon": "board",   "variants": [ { "spot": "bang_trang" } ] },
+    "bao_cao":   { "label": "Báo cáo tiến độ với PI",  "icon": "talk",    "needsPI": true, "fallback": "lap_trinh", "variants": [ { "spot": "canh_ban_PI" } ] },
+    "ca_phe":    { "label": "Pha cà phê",              "icon": "coffee",  "variants": [ { "spot": "pantry" } ] },
+    "ngu_gat":   { "label": "Ngủ gật",                 "icon": "zzz",     "variants": [ { "spot": "ban_rieng", "pose": "sleep" } ] },
+    "hop_nhom":  { "label": "Họp nhóm",                "icon": "talk",    "variants": [ { "spot": "hop" } ] },
+    "vang":      { "label": "Vắng",                    "icon": null,      "variants": [ { "spot": "door" } ] }
+  },
+  "templates": {
+    "sv_ca_ngay": { "label": "Cả ngày", "slots": [
+      { "from": "08:00", "to": "09:30", "weights": { "lap_trinh": 40, "doc_paper": 25, "ca_phe": 10, "ngu_gat": 10, "viet_bang": 15 } },
+      { "from": "09:30", "to": "11:30", "weights": { "lap_trinh": 35, "lap_rap": 30, "in_3d": 20, "doc_paper": 15 } },
+      { "from": "11:30", "to": "13:00", "weights": { "vang": 70, "ngu_gat": 30 } },
+      { "from": "13:00", "to": "14:30", "weights": { "ngu_gat": 25, "lap_trinh": 30, "doc_paper": 25, "ca_phe": 20 } },
+      { "from": "14:30", "to": "16:00", "weights": { "lap_rap": 35, "in_3d": 25, "bao_cao": 25, "lap_trinh": 15 } },
+      { "from": "16:00", "to": "17:30", "weights": { "lap_trinh": 40, "lap_rap": 30, "viet_bang": 15, "ca_phe": 15 } },
+      { "from": "17:30", "to": "08:00", "weights": { "vang": 100 } } ] },
+    "sv_buoi_sang": { "label": "Buổi sáng", "slots": [
+      { "from": "08:00", "to": "10:00", "weights": { "lap_trinh": 50, "in_3d": 25, "doc_paper": 25 } },
+      { "from": "10:00", "to": "11:30", "weights": { "lap_rap": 50, "lap_trinh": 30, "viet_bang": 20 } },
+      { "from": "11:30", "to": "08:00", "weights": { "vang": 100 } } ] },
+    "sv_den_muon": { "label": "Đến muộn", "slots": [
+      { "from": "08:00", "to": "13:30", "weights": { "vang": 100 } },
+      { "from": "13:30", "to": "15:30", "weights": { "lap_trinh": 40, "in_3d": 30, "ngu_gat": 30 } },
+      { "from": "15:30", "to": "18:00", "weights": { "lap_rap": 40, "bao_cao": 30, "doc_paper": 30 } },
+      { "from": "18:00", "to": "08:00", "weights": { "vang": 100 } } ] },
+    "pi_ca_ngay": { "label": "Cả ngày", "slots": [
+      { "from": "08:00", "to": "10:00", "weights": { "lam_viec": 60, "ca_phe": 20, "doc_paper": 20 } },
+      { "from": "10:00", "to": "11:30", "weights": { "lam_viec": 50, "viet_bang": 30, "doc_paper": 20 } },
+      { "from": "11:30", "to": "13:30", "weights": { "vang": 100 } },
+      { "from": "13:30", "to": "15:30", "weights": { "lam_viec": 60, "doc_paper": 20, "viet_bang": 20 } },
+      { "from": "15:30", "to": "17:00", "weights": { "lam_viec": 50, "ca_phe": 20, "viet_bang": 30 } },
+      { "from": "17:00", "to": "08:00", "weights": { "vang": 100 } } ] },
+    "pi_day_hoc": { "label": "Sáng lên lớp", "slots": [
+      { "from": "08:00", "to": "13:30", "weights": { "vang": 100 } },
+      { "from": "13:30", "to": "15:30", "weights": { "lam_viec": 70, "ca_phe": 30 } },
+      { "from": "15:30", "to": "17:30", "weights": { "lam_viec": 50, "viet_bang": 30, "doc_paper": 20 } },
+      { "from": "17:30", "to": "08:00", "weights": { "vang": 100 } } ] }
+  },
+  "events": [
+    { "label": "Họp nhóm hằng tuần", "days": [4], "from": "15:00", "to": "16:00", "act": "hop_nhom", "who": ["G", "A"] }
+  ],
+  "people": [
+    { "id": "G", "name": "Giang", "role": "PI", "desk": "PI", "look": "giang", "absentRate": 10,
+      "templates": { "pi_ca_ngay": 65, "pi_day_hoc": 35 },
+      "palette": { "H": "#262131", "h": "#433c52", "S": "#e9b892", "s": "#c48d6a", "E": "#2c2137", "G": "#3b3347", "L": "#c4e2f8",
+                   "T": "#d3e3f6", "t": "#9fbbdc", "C": "#ffffff", "P": "#3a4660", "B": "#4a3a32" } },
+    { "id": "A", "name": "A", "role": "Sinh viên", "desk": "A", "look": "svA", "absentRate": 10,
+      "templates": { "sv_ca_ngay": 60, "sv_buoi_sang": 20, "sv_den_muon": 20 },
+      "palette": { "H": "#6b4429", "h": "#8a5c3a", "S": "#f2c9a5", "s": "#d39f7c", "E": "#2c2137",
+                   "T": "#e9803d", "t": "#b95e26", "C": "#fbe3cf", "P": "#2f3b52", "B": "#3a3030" } }
+  ]
+}

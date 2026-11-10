@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phòng lab RCT</title>
+<script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed');</script>
+<link rel="icon" type="image/svg+xml" href="../assets/rct-network-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Be+Vietnam+Pro:wght@400;600&display=swap">
+<style>
+:root{--navy:#163c6c;--navy2:#102b52;--ink:#2c2137;--pale:#e8f0fa;--orange:#e9803d;--text:#171c23;--muted:#566577;--bg:#f8fafc;--pix:"VT323",monospace;--ui:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 var(--ui);padding:20px 16px 40px}
+.wrap{max-width:972px;margin:0 auto;display:grid;gap:14px}
+.wrap>*{min-width:0}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px}
+h1{font:400 2.4rem/1 var(--pix);margin:0;color:var(--navy);letter-spacing:.02em}
+.sub{margin:0;color:var(--muted);font-size:.88rem}
+.stage{background:var(--ink);padding:6px;box-shadow:4px 4px 0 var(--orange)}
+canvas{display:block;width:100%;max-width:100%;height:auto;image-rendering:pixelated;cursor:pointer}
+.bar{display:grid;gap:10px;background:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--navy);padding:10px 14px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.clock{font:400 2.4rem/1 var(--pix);color:var(--navy)}
+.date{color:var(--muted);font-size:.85rem}
+.spacer{flex:1}
+button{font:400 1.2rem/1 var(--pix);border:2px solid var(--ink);background:var(--pale);color:var(--ink);padding:5px 10px;cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+button:active{transform:translate(2px,2px);box-shadow:none}
+button[aria-pressed="true"]{background:var(--orange);color:#fff}
+button:focus-visible,input:focus-visible,canvas:focus-visible{outline:2px dashed var(--orange);outline-offset:2px}
+.group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.group span{font:400 1.1rem var(--pix);color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--orange)}
+.ticks{display:flex;justify-content:space-between;font:400 1rem var(--pix);color:var(--muted)}
+h2{font:400 1.7rem/1 var(--pix);color:var(--navy);margin:6px 0 0}
+#sched{display:grid;gap:10px}
+.st{display:grid;grid-template-columns:170px 1fr;gap:10px;background:#fff;border:2px solid var(--ink);padding:10px 12px}
+.st.sel{box-shadow:4px 4px 0 var(--orange)}
+.who{display:flex;gap:8px;align-items:flex-start}
+.dot{width:12px;height:12px;flex:none;margin-top:5px;background:var(--orange);border:2px solid var(--ink)}
+.dot.pi{background:var(--navy)}
+.who b{display:block}
+.who small{display:block;color:var(--muted);font-size:.78rem}
+.who .nowtxt{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.chip{border:2px solid #c6d3e3;padding:2px 8px;font-size:.82rem;background:var(--pale)}
+.chip time{font:400 1rem var(--pix);color:var(--muted);margin-right:5px}
+.chip.ev{border-style:dashed}
+.chip.now{border-color:var(--orange);background:#fff3ea;font-weight:600}
+.note{color:var(--muted);font-size:.82rem;margin:0}
+@media (max-width:560px){.st{grid-template-columns:1fr}.clock{font-size:2rem}}
+/* ?embed=1: chỉ còn khung phòng, dùng khi nhúng vào trang chính */
+.embed body{padding:0;background:transparent}
+.embed .wrap{gap:0}
+.embed header,.embed .bar,.embed h2,.embed #sched,.embed .note{display:none}
+.embed .stage{padding:0;box-shadow:none;background:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>PHÒNG LAB RCT</h1>
+    <p class="sub">Lịch mỗi người được bốc ngẫu nhiên theo trọng số, cố định trong ngày (giờ Việt Nam)</p>
+  </header>
+  <div class="stage"><canvas id="cv" width="960" height="624" aria-label="Phòng lab pixel; bấm vào nhân vật để đánh dấu"></canvas></div>
+  <div class="bar">
+    <div class="row">
+      <div><div class="clock" id="clock">--:--</div><div class="date" id="date"></div></div>
+      <div class="spacer"></div>
+      <div class="group" role="group" aria-label="Chọn ngày"><button id="prev">◀ Hôm trước</button><button id="next">Hôm sau ▶</button></div>
+      <div class="group" role="group" aria-label="Tốc độ"><span>Tốc độ</span>
+        <button data-speed="0">Dừng</button><button data-speed="1">×1</button><button data-speed="60">×60</button><button data-speed="600">×600</button></div>
+      <button id="live">Giờ thực</button>
+    </div>
+    <div>
+      <input type="range" id="scrub" min="0" max="1439" step="1" aria-label="Giờ trong ngày lab">
+      <div class="ticks"><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>00:00</span><span>04:00</span><span>08:00</span></div>
+    </div>
+  </div>
+  <h2 id="schedTitle">Lịch hôm nay</h2>
+  <div id="sched"></div>
+  <p class="note">Hình nhân vật và đồ đạc là pixel art tự vẽ cho RCT Lab. Lịch là mô phỏng, không phản ánh ai đang thật sự có mặt.</p>
+</div>
+<script src="sprites.js?v=1"></script>
+<script src="lab.js?v=1"></script>
+</body>
+</html>
