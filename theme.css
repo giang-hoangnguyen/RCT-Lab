@@ -233,3 +233,13 @@ main>section.section,main>section.research-section,main>section.community-sectio
 #teaching .material-story .rct-story-content{position:relative}
 #teaching .material-story .rct-story-footer{position:absolute;top:10px;right:16px;margin:0;padding:0}
 .project-timeline{margin-left:auto}
+
+/* Dự án: 4 thẻ một hàng; ảnh 3:2 lấp kín khung */
+.project-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.project-picture{height:auto!important;aspect-ratio:3/2;padding:0!important;overflow:hidden}
+.project-picture img{width:100%!important;height:100%!important;max-height:none!important;object-fit:cover!important;display:block}
+.project-card .project-body h3{font-size:16px}
+.project-card .project-body p{font-size:13px;line-height:1.55}
+@media (max-width:1050px){.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.project-grid{grid-template-columns:1fr}}
+.project-footer{min-height:34px}

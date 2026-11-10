@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024">
+  <!-- Minh họa: cánh tay robot mini 4 bậc tự do điều khiển bằng giọng nói (vẽ tay, phong cách nét navy) -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4f2fd"/><stop offset="1" stop-color="#c3e5fb"/></linearGradient>
+    <linearGradient id="white" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7f9fd"/><stop offset="1" stop-color="#d9e3f1"/></linearGradient>
+    <linearGradient id="blueTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4b7ad6"/><stop offset="1" stop-color="#3460bd"/></linearGradient>
+  </defs>
+  <rect width="1536" height="1024" fill="url(#bg)"/>
+
+  <!-- bóng sàn -->
+  <path d="M470 770 L740 905 L1150 790 L880 680 Z" fill="#a9d4f4" opacity=".75"/>
+
+  <!-- tín hiệu giọng nói: bong bóng có micro và sóng âm -->
+  <g stroke="#1a2a5e" stroke-linejoin="round">
+    <path d="M150 150 h300 a40 40 0 0 1 40 40 v130 a40 40 0 0 1 -40 40 h-180 l-60 55 l10 -55 h-70 a40 40 0 0 1 -40 -40 v-130 a40 40 0 0 1 40 -40z" fill="#ffffff" stroke-width="10"/>
+    <rect x="200" y="200" width="56" height="96" rx="28" fill="#2a4ea8" stroke-width="8"/>
+    <path d="M182 262 a46 46 0 0 0 92 0" fill="none" stroke-width="8" stroke-linecap="round"/>
+    <path d="M228 308 v26 M204 336 h48" fill="none" stroke-width="8" stroke-linecap="round"/>
+    <rect x="210" y="236" width="36" height="10" rx="5" fill="#f07b1a" stroke="none"/>
+  </g>
+  <g fill="#3d6cc8">
+    <rect x="300" y="236" width="14" height="44" rx="7"/><rect x="326" y="214" width="14" height="88" rx="7"/>
+    <rect x="352" y="196" width="14" height="124" rx="7"/><rect x="378" y="222" width="14" height="72" rx="7"/>
+    <rect x="404" y="244" width="14" height="28" rx="7"/><rect x="430" y="230" width="14" height="56" rx="7"/>
+  </g>
+  <g fill="none" stroke="#2f8de4" stroke-width="6" stroke-dasharray="16 14" stroke-linecap="round">
+    <path d="M505 215 q30 20 36 60"/><path d="M522 175 q55 30 64 110"/><path d="M540 135 q80 40 92 160"/>
+  </g>
+
+  <!-- đế xanh đục lỗ -->
+  <g stroke="#1a2a5e" stroke-width="9" stroke-linejoin="round">
+    <path d="M500 600 L760 520 L1040 600 L780 690 Z" fill="url(#blueTop)"/>
+    <path d="M500 600 L780 690 L780 850 L500 760 Z" fill="#2a4ea8"/>
+    <path d="M780 690 L1040 600 L1040 760 L780 850 Z" fill="#1f3f91"/>
+  </g>
+  <g fill="#16306e" transform="matrix(1,0.3214,0,1,500,600)">
+    <circle cx="40" cy="40" r="13"/><circle cx="85" cy="40" r="13"/><circle cx="130" cy="40" r="13"/><circle cx="175" cy="40" r="13"/><circle cx="220" cy="40" r="13"/>
+    <circle cx="62" cy="80" r="13"/><circle cx="107" cy="80" r="13"/><circle cx="152" cy="80" r="13"/><circle cx="197" cy="80" r="13"/><circle cx="242" cy="80" r="13"/>
+    <circle cx="40" cy="120" r="13"/><circle cx="85" cy="120" r="13"/><circle cx="130" cy="120" r="13"/><circle cx="175" cy="120" r="13"/><circle cx="220" cy="120" r="13"/>
+  </g>
+  <g fill="#122a63" transform="matrix(1,-0.3462,0,1,780,690)">
+    <circle cx="40" cy="45" r="12"/><circle cx="85" cy="45" r="12"/><circle cx="130" cy="45" r="12"/><circle cx="175" cy="45" r="12"/><circle cx="220" cy="45" r="12"/>
+    <circle cx="62" cy="88" r="12"/><circle cx="107" cy="88" r="12"/><circle cx="152" cy="88" r="12"/><circle cx="197" cy="88" r="12"/>
+    <rect x="200" y="110" width="40" height="18" rx="4" fill="#c8d2e6" stroke="#1a2a5e" stroke-width="5"/>
+    <circle cx="180" cy="119" r="7" fill="#f07b1a"/>
+  </g>
+  <path d="M520 607 L760 533 L1018 607" fill="none" stroke="#6f97e6" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- mâm xoay trắng -->
+  <g stroke="#1a2a5e" stroke-width="9">
+    <path d="M630 585 v45 a140 50 0 0 0 280 0 v-45" fill="#c9d6e8"/>
+    <ellipse cx="770" cy="585" rx="140" ry="50" fill="url(#white)"/>
+    <circle cx="700" cy="590" r="9" fill="#2a3d6e" stroke-width="4"/><circle cx="845" cy="580" r="9" fill="#2a3d6e" stroke-width="4"/>
+  </g>
+
+  <!-- trụ vai -->
+  <g stroke="#1a2a5e" stroke-width="9" stroke-linejoin="round">
+    <path d="M700 585 L700 450 a70 70 0 0 1 140 0 L840 585 Z" fill="url(#white)"/>
+    <path d="M840 450 L868 440 L868 570 L840 585 Z" fill="#b9c8de"/>
+    <path d="M712 580 L712 495 a58 58 0 0 1 116 0 L828 580 Z" fill="#3d6cc8"/>
+  </g>
+
+  <!-- tay trên: vai -> khuỷu -->
+  <g stroke-linecap="round">
+    <line x1="770" y1="450" x2="610" y2="270" stroke="#9fb3d1" stroke-width="96" transform="translate(16,14)"/>
+    <line x1="770" y1="450" x2="610" y2="270" stroke="#1a2a5e" stroke-width="100"/>
+    <line x1="770" y1="450" x2="610" y2="270" stroke="url(#white)" stroke-width="82"/>
+    <line x1="735" y1="410" x2="645" y2="310" stroke="#1a2a5e" stroke-width="54"/>
+    <line x1="735" y1="410" x2="645" y2="310" stroke="#3d6cc8" stroke-width="40"/>
+  </g>
+
+  <!-- cẳng tay: khuỷu -> cổ tay -->
+  <g stroke-linecap="round">
+    <line x1="610" y1="270" x2="990" y2="250" stroke="#9fb3d1" stroke-width="86" transform="translate(14,16)"/>
+    <line x1="610" y1="270" x2="990" y2="250" stroke="#1a2a5e" stroke-width="90"/>
+    <line x1="610" y1="270" x2="990" y2="250" stroke="url(#white)" stroke-width="72"/>
+    <line x1="680" y1="266" x2="920" y2="254" stroke="#1a2a5e" stroke-width="50"/>
+    <line x1="680" y1="266" x2="920" y2="254" stroke="#3d6cc8" stroke-width="36"/>
+    <line x1="700" y1="258" x2="900" y2="248" stroke="#6f97e6" stroke-width="6"/>
+  </g>
+
+  <!-- vật màu cam đang gắp -->
+  <g stroke="#1a2a5e" stroke-width="8" stroke-linejoin="round">
+    <path d="M972 432 h40 v44 h-40 z" fill="#f07b1a"/>
+    <path d="M972 432 l8 -8 h40 l-8 8 z" fill="#ffa24d"/>
+  </g>
+
+  <!-- cổ tay và tay gắp -->
+  <g stroke="#1a2a5e" stroke-width="9" stroke-linejoin="round">
+    <rect x="950" y="250" width="84" height="110" rx="18" fill="url(#white)"/>
+    <rect x="1034" y="262" width="20" height="92" rx="6" fill="#b9c8de"/>
+    <rect x="936" y="356" width="112" height="26" rx="6" fill="#c8d2e6"/>
+    <path d="M942 380 h24 v104 l10 12 h-24 l-10 -12 z" fill="#2a4ea8"/>
+    <path d="M1042 380 h-24 v104 l-10 12 h24 l10 -12 z" fill="#2a4ea8"/>
+  </g>
+  <!-- khớp: vai, khuỷu, cổ tay -->
+  <g stroke="#1a2a5e" stroke-width="8">
+    <circle cx="770" cy="450" r="34" fill="#ffffff"/><circle cx="770" cy="450" r="16" fill="#c8d2e6"/><circle cx="770" cy="450" r="7" fill="#f07b1a" stroke-width="4"/>
+    <circle cx="610" cy="270" r="32" fill="#ffffff"/><circle cx="610" cy="270" r="15" fill="#c8d2e6"/><circle cx="610" cy="270" r="7" fill="#f07b1a" stroke-width="4"/>
+    <circle cx="990" cy="250" r="28" fill="#ffffff"/><circle cx="990" cy="250" r="13" fill="#c8d2e6"/><circle cx="990" cy="250" r="6" fill="#f07b1a" stroke-width="4"/>
+  </g>
+
+  <!-- dây tín hiệu từ đế lên vai -->
+  <path d="M880 650 C 930 600, 900 520, 860 500" fill="none" stroke="#1a2a5e" stroke-width="12" stroke-linecap="round"/>
+  <path d="M880 650 C 930 600, 900 520, 860 500" fill="none" stroke="#3d6cc8" stroke-width="5" stroke-linecap="round"/>
+  <rect x="870" y="640" width="22" height="16" rx="3" fill="#f07b1a" stroke="#1a2a5e" stroke-width="5"/>
+</svg>
