@@ -212,3 +212,11 @@ main>section.section,main>section.research-section,main>section.community-sectio
 #teaching .material-story .rct-story-footer{padding-top:4px}
 #teaching .material-story .rct-story-link{font-size:12.5px}
 @media (max-width:700px){#teaching .rct-story-list{grid-template-columns:1fr}}
+
+/* Tài liệu: bảng chuyển động 2x2 */
+#teaching .material-story .motion-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+#teaching .material-story .motion-list li{grid-template-columns:1fr;gap:0}
+/* Dự án: trưởng nhóm ở góc dưới trái ảnh */
+.project-picture{position:relative}
+.project-lead{position:absolute;left:10px;bottom:10px;display:flex;align-items:center;gap:6px;padding:3px 9px 3px 3px;background:#fff;border:2px solid #2c2137;box-shadow:2px 2px 0 var(--orange);font:600 13px/1 "Segoe UI",Inter,system-ui,sans-serif;color:var(--ink)}
+.project-lead img{width:28px;height:28px;image-rendering:pixelated;background:#e8f0fa}
