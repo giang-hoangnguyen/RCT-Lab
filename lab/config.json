@@ -2,38 +2,239 @@
   "timezone": "Asia/Ho_Chi_Minh",
   "dayStart": "08:00",
   "blockMinutes": 40,
-  "studentsPresent": { "1": 35, "2": 45, "3": 20 },
+  "studentsPresent": {
+    "1": 35,
+    "2": 45,
+    "3": 20
+  },
   "piRate": 18,
   "actions": {
-    "lam_viec":  { "label": "làm việc ở bàn",          "icon": "laptop",  "variants": [ { "spot": "ban_rieng", "pose": "type" } ] },
-    "lap_trinh": { "label": "lập trình MCU",           "icon": "chip",    "variants": [ { "spot": "ban_rieng", "pose": "type" } ] },
-    "in_3d":     { "label": "in 3D",                   "icon": "printer", "variants": [ { "spot": "may_in" } ] },
-    "lap_rap":   { "label": "lắp ráp robot",           "icon": "wrench",  "variants": [ { "spot": "ban_lap_rap" } ] },
-    "doc_paper": { "label": "đọc paper",               "icon": "paper",   "variants": [ { "spot": "sofa", "pose": "read", "w": 2 }, { "spot": "tu_sach", "w": 1 } ] },
-    "viet_bang": { "label": "viết bảng, nghĩ ý tưởng", "icon": "board",   "variants": [ { "spot": "bang_trang" } ] },
-    "bao_cao":   { "label": "báo cáo tiến độ với PI",  "icon": "talk",    "needsPI": true, "fallback": "lap_trinh", "variants": [ { "spot": "canh_ban_PI" } ] },
-    "ca_phe":    { "label": "pha cà phê",              "icon": "coffee",  "variants": [ { "spot": "pantry" } ] },
-    "ngu_gat":   { "label": "ngủ gật",                 "icon": "zzz",     "variants": [ { "spot": "ban_rieng", "pose": "sleep" } ] }
+    "lam_viec": {
+      "label": "làm việc ở bàn",
+      "icon": "laptop",
+      "variants": [
+        {
+          "spot": "ban_rieng",
+          "pose": "type"
+        }
+      ]
+    },
+    "lap_trinh": {
+      "label": "lập trình MCU",
+      "icon": "chip",
+      "variants": [
+        {
+          "spot": "ban_rieng",
+          "pose": "type"
+        }
+      ]
+    },
+    "in_3d": {
+      "label": "in 3D",
+      "icon": "printer",
+      "variants": [
+        {
+          "spot": "may_in"
+        }
+      ]
+    },
+    "lap_rap": {
+      "label": "lắp ráp robot",
+      "icon": "wrench",
+      "variants": [
+        {
+          "spot": "ban_lap_rap"
+        }
+      ]
+    },
+    "doc_paper": {
+      "label": "đọc paper",
+      "icon": "paper",
+      "variants": [
+        {
+          "spot": "ghe_doc",
+          "pose": "read",
+          "w": 2
+        },
+        {
+          "spot": "tu_sach",
+          "w": 1
+        },
+        {
+          "spot": "ban_hop",
+          "w": 1
+        }
+      ]
+    },
+    "viet_bang": {
+      "label": "viết bảng, nghĩ ý tưởng",
+      "icon": "board",
+      "variants": [
+        {
+          "spot": "bang_trang"
+        }
+      ]
+    },
+    "bao_cao": {
+      "label": "báo cáo tiến độ với PI",
+      "icon": "talk",
+      "needsPI": true,
+      "fallback": "lap_trinh",
+      "variants": [
+        {
+          "spot": "canh_ban_PI"
+        }
+      ]
+    },
+    "ca_phe": {
+      "label": "pha cà phê",
+      "icon": "coffee",
+      "variants": [
+        {
+          "spot": "pantry"
+        }
+      ]
+    },
+    "ngu_gat": {
+      "label": "ngủ gật",
+      "icon": "zzz",
+      "variants": [
+        {
+          "spot": "ban_rieng",
+          "pose": "sleep"
+        }
+      ]
+    },
+    "nghi": {
+      "label": "nghỉ, xem TV",
+      "icon": "tv",
+      "variants": [
+        {
+          "spot": "sofa"
+        }
+      ]
+    }
   },
   "roles": {
-    "PI":        { "lam_viec": 55, "viet_bang": 20, "doc_paper": 15, "ca_phe": 10 },
-    "Sinh viên": { "lap_trinh": 25, "in_3d": 15, "lap_rap": 18, "doc_paper": 12, "viet_bang": 8, "bao_cao": 10, "ca_phe": 6, "ngu_gat": 6 }
+    "PI": {
+      "lam_viec": 50,
+      "viet_bang": 15,
+      "doc_paper": 15,
+      "ca_phe": 12,
+      "nghi": 8
+    },
+    "Sinh viên": {
+      "lap_trinh": 22,
+      "in_3d": 12,
+      "lap_rap": 15,
+      "doc_paper": 9,
+      "viet_bang": 7,
+      "bao_cao": 9,
+      "ca_phe": 7,
+      "ngu_gat": 6,
+      "nghi": 13
+    }
   },
   "people": [
-    { "id": "giang", "name": "Giang", "role": "PI", "desk": "PI", "look": "giang",
-      "palette": { "H": "#262131", "h": "#433c52", "S": "#e9b892", "s": "#c48d6a", "E": "#2c2137", "G": "#3b3347", "L": "#c4e2f8",
-                   "T": "#d3e3f6", "t": "#9fbbdc", "C": "#ffffff", "P": "#3a4660", "B": "#4a3a32" } },
-    { "id": "anh", "name": "Ánh", "role": "Sinh viên", "desk": "SV", "look": "anh",
-      "palette": { "H": "#3a2630", "h": "#5a3f4b", "c": "#e9803d", "S": "#f2c9a5", "s": "#d39f7c", "E": "#2c2137",
-                   "T": "#f4a7b9", "t": "#d27f94", "C": "#ffffff", "P": "#3a4660", "B": "#5a3a3a" } },
-    { "id": "sang", "name": "Sang", "role": "Sinh viên", "desk": "SV", "look": "sang",
-      "palette": { "H": "#262131", "h": "#433c52", "S": "#f2c9a5", "s": "#d39f7c", "E": "#2c2137",
-                   "T": "#4a7bd0", "t": "#355ea6", "C": "#ffffff", "P": "#2f3b52", "B": "#3a3030" } },
-    { "id": "triet", "name": "Triết", "role": "Sinh viên", "desk": "SV", "look": "triet",
-      "palette": { "H": "#5a3a28", "h": "#7a5238", "S": "#f2c9a5", "s": "#d39f7c", "E": "#2c2137",
-                   "T": "#4f8a5b", "t": "#3a6a44", "C": "#ffffff", "P": "#3b3b45", "B": "#3a3030" } },
-    { "id": "khiet", "name": "Khiết", "role": "Sinh viên", "desk": "SV", "look": "khiet",
-      "palette": { "H": "#2b2633", "h": "#4a4458", "G": "#3b3347", "L": "#c4e2f8", "S": "#f2c9a5", "s": "#d39f7c", "E": "#2c2137",
-                   "T": "#8e6bb8", "t": "#6c4f93", "C": "#ffffff", "P": "#2f3b52", "B": "#3a3030" } }
+    {
+      "id": "giang",
+      "name": "Giang",
+      "role": "PI",
+      "desk": "PI",
+      "look": "giang",
+      "palette": {
+        "H": "#262131",
+        "h": "#433c52",
+        "S": "#e9b892",
+        "s": "#c48d6a",
+        "E": "#2c2137",
+        "G": "#3b3347",
+        "L": "#c4e2f8",
+        "T": "#d3e3f6",
+        "t": "#9fbbdc",
+        "C": "#ffffff",
+        "P": "#3a4660",
+        "B": "#4a3a32"
+      }
+    },
+    {
+      "id": "anh",
+      "name": "Ánh",
+      "role": "Sinh viên",
+      "desk": "SV",
+      "look": "anh",
+      "palette": {
+        "H": "#3a2630",
+        "h": "#5a3f4b",
+        "c": "#e9803d",
+        "S": "#f2c9a5",
+        "s": "#d39f7c",
+        "E": "#2c2137",
+        "T": "#f4a7b9",
+        "t": "#d27f94",
+        "C": "#ffffff",
+        "P": "#3a4660",
+        "B": "#5a3a3a"
+      }
+    },
+    {
+      "id": "sang",
+      "name": "Sang",
+      "role": "Sinh viên",
+      "desk": "SV",
+      "look": "sang",
+      "palette": {
+        "H": "#262131",
+        "h": "#433c52",
+        "S": "#f2c9a5",
+        "s": "#d39f7c",
+        "E": "#2c2137",
+        "T": "#4a7bd0",
+        "t": "#355ea6",
+        "C": "#ffffff",
+        "P": "#2f3b52",
+        "B": "#3a3030"
+      }
+    },
+    {
+      "id": "triet",
+      "name": "Triết",
+      "role": "Sinh viên",
+      "desk": "SV",
+      "look": "triet",
+      "palette": {
+        "H": "#5a3a28",
+        "h": "#7a5238",
+        "S": "#f2c9a5",
+        "s": "#d39f7c",
+        "E": "#2c2137",
+        "T": "#4f8a5b",
+        "t": "#3a6a44",
+        "C": "#ffffff",
+        "P": "#3b3b45",
+        "B": "#3a3030"
+      }
+    },
+    {
+      "id": "khiet",
+      "name": "Khiết",
+      "role": "Sinh viên",
+      "desk": "SV",
+      "look": "khiet",
+      "palette": {
+        "H": "#2b2633",
+        "h": "#4a4458",
+        "G": "#3b3347",
+        "L": "#c4e2f8",
+        "S": "#f2c9a5",
+        "s": "#d39f7c",
+        "E": "#2c2137",
+        "T": "#8e6bb8",
+        "t": "#6c4f93",
+        "C": "#ffffff",
+        "P": "#2f3b52",
+        "B": "#3a3030"
+      }
+    }
   ]
 }

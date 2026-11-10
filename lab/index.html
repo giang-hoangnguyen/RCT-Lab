@@ -17,8 +17,6 @@ header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:bas
 h1{font:400 2.4rem/1 var(--pix);margin:0;color:var(--navy);letter-spacing:.02em}
 .stage{background:var(--ink);padding:6px;box-shadow:4px 4px 0 var(--orange)}
 canvas{display:block;width:100%;max-width:100%;height:auto;image-rendering:pixelated;cursor:pointer}
-.bar{display:none;gap:10px;background:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--navy);padding:10px 14px}
-.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
 .clock{font:400 2.4rem/1 var(--pix);color:var(--navy)}
 .date{color:var(--muted);font-size:.85rem}
 .spacer{flex:1}
@@ -50,25 +48,11 @@ h2{font:400 1.7rem/1 var(--pix);color:var(--navy);margin:6px 0 0}
   <header>
     <h1>PHÒNG LAB RCT</h1>
   </header>
-  <div class="stage"><canvas id="cv" width="960" height="624" aria-label="Phòng lab pixel; bấm vào nhân vật để đánh dấu"></canvas></div>
-  <div class="bar">
-    <div class="row">
-      <div><div class="clock" id="clock">--:--</div><div class="date" id="date"></div></div>
-      <div class="spacer"></div>
-      <div class="group" role="group" aria-label="Chọn ngày"><button id="prev">◀ Hôm trước</button><button id="next">Hôm sau ▶</button></div>
-      <div class="group" role="group" aria-label="Tốc độ"><span>Tốc độ</span>
-        <button data-speed="0">Dừng</button><button data-speed="1">×1</button><button data-speed="60">×60</button><button data-speed="600">×600</button></div>
-      <button id="live">Giờ thực</button>
-    </div>
-    <div>
-      <input type="range" id="scrub" min="0" max="1439" step="1" aria-label="Giờ trong ngày lab">
-      <div class="ticks"><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>00:00</span><span>04:00</span><span>08:00</span></div>
-    </div>
-  </div>
+  <div class="stage"><canvas id="cv" width="1344" height="960" aria-label="Phòng lab pixel; bấm vào nhân vật để đánh dấu"></canvas></div>
   <h2>Đang có mặt</h2>
   <ul id="now" class="now-list" aria-live="polite"></ul>
 </div>
-<script src="sprites.js?v=2"></script>
-<script src="lab.js?v=2"></script>
+<script src="sprites.js?v=4"></script>
+<script src="lab.js?v=6"></script>
 </body>
 </html>

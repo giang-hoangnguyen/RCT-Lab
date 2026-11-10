@@ -268,6 +268,25 @@ function paint(ctx, rows, pal, ox = 0, oy = 0) {
     const col = ch === 'O' ? OUT : pal[ch]; if (!col) continue;
     ctx.fillStyle = col; ctx.fillRect(ox + x, oy + y, 1, 1); } });
 }
+const OUT_RGB = [0x2c, 0x21, 0x37];
+function selout(c) {
+  const g2 = c.getContext('2d'), im = g2.getImageData(0, 0, c.width, c.height), d = im.data, w = c.width, h = c.height;
+  const isOut = i => d[i + 3] && d[i] === OUT_RGB[0] && d[i + 1] === OUT_RGB[1] && d[i + 2] === OUT_RGB[2];
+  const src = new Uint8ClampedArray(d);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const i = (y * w + x) * 4; if (!isOut(i)) continue;
+    let best = null;
+    for (const [dx, dy] of [[0, 1], [1, 0], [-1, 0], [0, -1]]) {   // ưu tiên vùng bên dưới/bên cạnh
+      const nx = x + dx, ny = y + dy; if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+      const j = (ny * w + nx) * 4; if (!src[j + 3] || (src[j] === OUT_RGB[0] && src[j + 1] === OUT_RGB[1] && src[j + 2] === OUT_RGB[2])) continue;
+      best = j; break;
+    }
+    if (best === null) { d[i] = 0x18; d[i + 1] = 0x14; d[i + 2] = 0x25; continue; }
+    // tối hóa 60% và kéo về tím than #181425
+    d[i] = Math.round(src[best] * .38 + 0x18 * .62); d[i + 1] = Math.round(src[best + 1] * .34 + 0x14 * .66); d[i + 2] = Math.round(src[best + 2] * .42 + 0x25 * .58);
+  }
+  g2.putImageData(im, 0, 0);
+}
 function mirror(src) { const c = mk(src.width, src.height), g = c.getContext('2d'); g.translate(src.width, 0); g.scale(-1, 1); g.drawImage(src, 0, 0); return c; }
 
 /* Ghép bộ khung cho một nhân vật */
@@ -296,6 +315,10 @@ function buildChar(lookName, pal) {
   F.sitDown = sd;
   const sdb = mk(16, 21), sbg = sdb.getContext('2d'); sbg.drawImage(sd, 0, 0); paint(sbg, BOOK.d, BOOK.pal, 0, 13);
   F.readDown = sdb;
+  // viền chọn lọc: mỗi pixel viền lấy màu tối của vùng kề bên (đổi sắc về tím than), thay cho một màu viền chung
+  const seen = new Set();
+  const walk = o => { if (!o || seen.has(o)) return; seen.add(o); if (o instanceof HTMLCanvasElement) selout(o); else if (Array.isArray(o)) o.forEach(walk); else if (typeof o === 'object') Object.values(o).forEach(walk); };
+  walk(F);
   return F;
 }
 
@@ -309,6 +332,7 @@ const ICONS = {
   board:   { p: { k: '#3b4a6b', w: '#ffffff', o: '#e9803d', b: '#163c6c' }, d: ['kkkkkkk', 'kwwwwwk', 'kwbbwwk', 'kwwwowk', 'kwbwwwk', 'kkkkkkk', '.k...k.'] },
   talk:    { p: { b: '#163c6c', w: '#ffffff' }, d: ['.bbbbb.', 'bwwwwwb', 'bwbwbwb', 'bwwwwwb', '.bbbbb.', '..b....', '.b.....'] },
   coffee:  { p: { s: '#aab4c2', w: '#ffffff', c: '#7b4a2a', k: '#3b4a6b' }, d: ['..s.s..', '...s.s.', 'kkkkk..', 'kcccckk', 'kwwwwkk', '.kwwk..', '..kk...'] },
+  tv:      { p: { k: '#2f3546', s: '#6fb6ea', g: '#3c8c5a' }, d: ['kkkkkkk', 'ksssssk', 'ksssssk', 'kgggggk', 'kkkkkkk', '..k.k..', '.kkkkk.'] },
   zzz:     { p: { z: '#5b6ee1' }, d: ['zzzz...', '...z...', '..z....', '.z..zzz', 'zzzz.z.', '....z..', '....zzz'] }
 };
 

@@ -105,7 +105,7 @@ main>section.section,main>section.research-section,main>section.community-sectio
 .sim-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;min-height:180px}
 .sim-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#0d1117}
 .sim-soon{flex:1;display:grid;place-items:center;font-size:22px;font-weight:600;color:var(--navy)}
-.sim-frame{margin:14px 0 12px;aspect-ratio:320/208;background:#3b4a6b;border:2px solid #2c2137}
+.sim-frame{margin:14px 0 12px;aspect-ratio:448/320;box-sizing:content-box;background:#3b4a6b;border:2px solid #2c2137}
 .sim-frame iframe{display:block;width:100%;height:100%;border:0}
 .sim-open{align-self:flex-start}
 .community-layout{grid-template-columns:3fr 2fr}
