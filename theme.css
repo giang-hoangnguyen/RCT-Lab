@@ -220,3 +220,16 @@ main>section.section,main>section.research-section,main>section.community-sectio
 .project-picture{position:relative}
 .project-lead{position:absolute;left:10px;bottom:10px;display:flex;align-items:center;gap:6px;padding:3px 9px 3px 3px;background:#fff;border:2px solid #2c2137;box-shadow:2px 2px 0 var(--orange);font:600 13px/1 "Segoe UI",Inter,system-ui,sans-serif;color:var(--ink)}
 .project-lead img{width:28px;height:28px;image-rendering:pixelated;background:#e8f0fa}
+
+/* Tin mới: tin đã qua chữ thường, tin đang tiến hành chữ đậm, các dòng sát hơn */
+.dated-news{padding-block:9px}
+.dated-news p{font-weight:400}
+.dated-news.ongoing p{font-weight:700}
+/* Dự án: trưởng nhóm cùng hàng timeline */
+.project-footer{justify-content:space-between;align-items:center}
+.project-lead{position:static;padding:2px 8px 2px 2px;font-size:12.5px;box-shadow:2px 2px 0 var(--orange)}
+.project-lead img{width:24px;height:24px}
+/* Tài liệu: "Chi tiết" cùng hàng với nhãn nguyên lý */
+#teaching .material-story .rct-story-content{position:relative}
+#teaching .material-story .rct-story-footer{position:absolute;top:10px;right:16px;margin:0;padding:0}
+.project-timeline{margin-left:auto}
