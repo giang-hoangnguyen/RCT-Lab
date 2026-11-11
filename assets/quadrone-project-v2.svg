@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <!-- Bản vẽ: mini quadrone điều khiển bằng ESP32, giá rẻ, dễ chế tạo.
+       Nhiều drone nhỏ (thân là bo mạch ESP32) bay, điện thoại điều khiển qua Wi-Fi, thảm bày linh kiện tự chế. Phong cách phẳng. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f0fb"/><stop offset=".6" stop-color="#eef3fa"/><stop offset="1" stop-color="#fbeee3"/></linearGradient>
+    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#c9d8ea"/></pattern>
+    <pattern id="mat" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="#d6e6f5"/><path d="M24 0 V24 M0 24 H24" stroke="#b3cbe3" stroke-width="2"/></pattern>
+    <!-- một chiếc mini quadrone nhìn ngang, gốc tọa độ ở tâm thân -->
+    <g id="drone" stroke="#163c6c" stroke-linejoin="round" stroke-linecap="round">
+      <!-- cánh quạt quay (đĩa mờ) -->
+      <ellipse cx="-96" cy="-40" rx="58" ry="7" fill="#a9cdee" stroke-width="5"/>
+      <ellipse cx="96" cy="-40" rx="58" ry="7" fill="#a9cdee" stroke-width="5"/>
+      <line x1="-130" y1="-40" x2="-108" y2="-40" stroke="#ffffff" stroke-width="4"/><line x1="62" y1="-40" x2="84" y2="-40" stroke="#ffffff" stroke-width="4"/>
+      <!-- động cơ coreless -->
+      <rect x="-106" y="-36" width="20" height="30" rx="7" fill="#ffffff" stroke-width="5"/><rect x="-106" y="-26" width="20" height="7" fill="#e9803d" stroke="none"/>
+      <rect x="86" y="-36" width="20" height="30" rx="7" fill="#ffffff" stroke-width="5"/><rect x="86" y="-26" width="20" height="7" fill="#e9803d" stroke="none"/>
+      <!-- khung = bo mạch PCB -->
+      <rect x="-112" y="-8" width="224" height="14" rx="5" fill="#2c6fb0" stroke-width="6"/>
+      <line x1="-100" y1="-3" x2="100" y2="-3" stroke="#7fb0ee" stroke-width="3"/>
+      <!-- module ESP32 có vỏ kim loại + anten mạch in -->
+      <rect x="-38" y="-30" width="76" height="24" rx="4" fill="#dfe5ee" stroke-width="5"/>
+      <rect x="-30" y="-25" width="44" height="14" rx="2" fill="#c0cbdc" stroke="none"/>
+      <path d="M20 -24 h10 v5 h-8 v5 h8" fill="none" stroke="#e9803d" stroke-width="3"/>
+      <!-- đèn trạng thái -->
+      <circle cx="-56" cy="-1" r="4" fill="#5cf08e" stroke="none"/>
+      <!-- pin 1S dưới bụng -->
+      <rect x="-32" y="6" width="64" height="16" rx="5" fill="#e9803d" stroke-width="5"/>
+      <rect x="-20" y="10" width="26" height="7" rx="2" fill="#ffffff" stroke="none"/>
+      <!-- chân đáp nhỏ -->
+      <path d="M-80 6 v12 M80 6 v12" stroke-width="6"/>
+    </g>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#dots)" opacity=".55"/>
+
+  <!-- sóng Wi-Fi từ điện thoại (nét liền) -->
+  <g fill="none" stroke="#0084ed" stroke-width="7" stroke-linecap="round">
+    <path d="M300 258 A42 42 0 0 1 342 300"/><path d="M300 226 A74 74 0 0 1 374 300"/><path d="M300 194 A106 106 0 0 1 406 300"/>
+  </g>
+
+  <!-- ba mini quadrone: xa nhỏ, gần to -->
+  <use href="#drone" transform="translate(470 180) scale(.62)" opacity=".85"/>
+  <use href="#drone" transform="translate(930 150) scale(.72)" opacity=".92"/>
+  <use href="#drone" transform="translate(690 330) scale(1.02)"/>
+  <!-- bóng mờ dưới drone gần -->
+  <ellipse cx="690" cy="430" rx="90" ry="9" fill="#163c6c" opacity=".08"/>
+
+  <!-- điện thoại điều khiển -->
+  <g stroke="#163c6c" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="150" y="300" width="150" height="270" rx="24" fill="#ffffff" stroke-width="9"/>
+    <rect x="166" y="330" width="118" height="206" rx="10" fill="#e1ecf9" stroke-width="5"/>
+    <rect x="200" y="314" width="50" height="6" rx="3" fill="#163c6c" stroke="none"/>
+    <rect x="178" y="344" width="94" height="22" rx="6" fill="#163c6c" stroke="none"/>
+    <circle cx="192" cy="355" r="5" fill="#5cf08e" stroke="none"/><rect x="204" y="352" width="54" height="6" rx="3" fill="#7fb0ee" stroke="none"/>
+    <!-- hai cần ảo -->
+    <circle cx="196" cy="476" r="22" fill="#ffffff" stroke-width="5"/><circle cx="200" cy="470" r="9" fill="#e9803d" stroke="none"/>
+    <circle cx="254" cy="476" r="22" fill="#ffffff" stroke-width="5"/><circle cx="250" cy="482" r="9" fill="#0084ed" stroke="none"/>
+    <rect x="186" y="392" width="78" height="40" rx="6" fill="#ffffff" stroke-width="4"/>
+    <path d="M194 420 l12 -12 l10 8 l14 -14 l12 10" fill="none" stroke="#e9803d" stroke-width="4"/>
+  </g>
+
+  <!-- thảm cắt bày bộ linh kiện tự chế -->
+  <g stroke="#163c6c" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="420" y="520" width="680" height="220" rx="20" fill="url(#mat)" stroke-width="8"/>
+    <!-- bo ESP32 dev board -->
+    <rect x="460" y="560" width="150" height="74" rx="8" fill="#2c6fb0" stroke-width="6"/>
+    <g fill="#dfe5ee" stroke="none"><rect x="470" y="556" width="130" height="6"/><rect x="470" y="632" width="130" height="6"/></g>
+    <g fill="#163c6c" stroke="none"><rect x="474" y="557" width="4" height="4"/><rect x="486" y="557" width="4" height="4"/><rect x="498" y="557" width="4" height="4"/><rect x="510" y="557" width="4" height="4"/><rect x="522" y="557" width="4" height="4"/><rect x="534" y="557" width="4" height="4"/><rect x="546" y="557" width="4" height="4"/><rect x="558" y="557" width="4" height="4"/><rect x="570" y="557" width="4" height="4"/><rect x="582" y="557" width="4" height="4"/></g>
+    <rect x="500" y="574" width="76" height="46" rx="4" fill="#dfe5ee" stroke-width="5"/>
+    <rect x="508" y="580" width="44" height="30" rx="2" fill="#c0cbdc" stroke="none"/>
+    <path d="M560 580 h10 v6 h-8 v6 h8 v6 h-8" fill="none" stroke="#e9803d" stroke-width="3"/>
+    <rect x="590" y="588" width="16" height="18" rx="3" fill="#dfe5ee" stroke-width="4"/>
+    <!-- 4 động cơ coreless -->
+    <g><rect x="650" y="566" width="22" height="36" rx="8" fill="#ffffff" stroke-width="5"/><rect x="650" y="578" width="22" height="8" fill="#e9803d" stroke="none"/>
+       <rect x="684" y="566" width="22" height="36" rx="8" fill="#ffffff" stroke-width="5"/><rect x="684" y="578" width="22" height="8" fill="#e9803d" stroke="none"/>
+       <rect x="650" y="614" width="22" height="36" rx="8" fill="#ffffff" stroke-width="5"/><rect x="650" y="626" width="22" height="8" fill="#e9803d" stroke="none"/>
+       <rect x="684" y="614" width="22" height="36" rx="8" fill="#ffffff" stroke-width="5"/><rect x="684" y="626" width="22" height="8" fill="#e9803d" stroke="none"/></g>
+    <!-- 4 cánh quạt nhỏ (hai lá) -->
+    <g transform="translate(790 580) rotate(-18)"><rect x="-34" y="-5" width="68" height="10" rx="5" fill="#a9cdee" stroke-width="5"/><circle r="7" fill="#ffffff" stroke-width="4"/></g><g transform="translate(866 580) rotate(22)"><rect x="-34" y="-5" width="68" height="10" rx="5" fill="#a9cdee" stroke-width="5"/><circle r="7" fill="#ffffff" stroke-width="4"/></g><g transform="translate(790 628) rotate(22)"><rect x="-34" y="-5" width="68" height="10" rx="5" fill="#a9cdee" stroke-width="5"/><circle r="7" fill="#ffffff" stroke-width="4"/></g><g transform="translate(866 628) rotate(-18)"><rect x="-34" y="-5" width="68" height="10" rx="5" fill="#a9cdee" stroke-width="5"/><circle r="7" fill="#ffffff" stroke-width="4"/></g>
+    <!-- pin LiPo 1S -->
+    <rect x="930" y="566" width="120" height="44" rx="10" fill="#e9803d" stroke-width="6"/>
+    <rect x="950" y="578" width="50" height="18" rx="4" fill="#ffffff" stroke="none"/>
+    <path d="M1050 580 h22 M1050 596 h22" stroke-width="5"/>
+    <rect x="1070" y="574" width="16" height="30" rx="4" fill="#ffffff" stroke-width="4"/>
+    <!-- vít, tua vít -->
+    <g fill="#9fb0c8" stroke-width="3"><circle cx="476" cy="680" r="7"/><circle cx="500" cy="690" r="7"/><circle cx="524" cy="680" r="7"/><circle cx="548" cy="692" r="7"/></g>
+    <rect x="600" y="676" width="150" height="20" rx="10" fill="#0084ed" stroke-width="6"/>
+    <rect x="750" y="682" width="70" height="8" rx="3" fill="#dfe5ee" stroke-width="5"/>
+    <!-- bản mạch khung drone chưa lắp -->
+    <rect x="860" y="660" width="210" height="16" rx="5" fill="#2c6fb0" stroke-width="6"/>
+    <line x1="872" y1="665" x2="1058" y2="665" stroke="#7fb0ee" stroke-width="3"/>
+    <g fill="#ffffff" stroke-width="4"><circle cx="880" cy="668" r="5"/><circle cx="1050" cy="668" r="5"/></g>
+  </g>
+</svg>

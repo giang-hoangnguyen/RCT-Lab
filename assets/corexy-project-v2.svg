@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="190 66 990 660" width="990" height="660">
+  <!-- Bản vẽ: hệ thống CoreXY mô phỏng ngón tay robot, tích hợp thị giác máy và phản hồi xúc giác. Nhìn ngang, phong cách phẳng. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f0fb"/><stop offset=".6" stop-color="#eef3fa"/><stop offset="1" stop-color="#fbeee3"/></linearGradient>
+    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#c9d8ea"/></pattern>
+    <pattern id="screw" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><rect width="12" height="12" fill="#d7e2ef"/><rect width="5" height="12" fill="#9fb0c8"/></pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#dots)" opacity=".55"/>
+  <ellipse cx="600" cy="726" rx="360" ry="14" fill="#163c6c" opacity=".1"/>
+  <line x1="180" y1="722" x2="1020" y2="722" stroke="#9fb0c8" stroke-width="4" stroke-dasharray="14 12" stroke-linecap="round"/>
+
+  <g stroke="#163c6c" stroke-linejoin="round" stroke-linecap="round">
+    <!-- vùng nhìn của camera (nền mờ, không nét đứt) -->
+    <path d="M600 156 L470 600 L730 600 Z" fill="#0084ed" opacity=".08" stroke="none"/>
+    <!-- khung: hai trụ, dầm trên, dầm dưới -->
+    <rect x="270" y="150" width="40" height="560" rx="8" fill="#a9cdee" stroke-width="8"/>
+    <rect x="890" y="150" width="40" height="560" rx="8" fill="#a9cdee" stroke-width="8"/>
+    <line x1="282" y1="170" x2="282" y2="690" stroke="#ffffff" stroke-width="5"/><line x1="902" y1="170" x2="902" y2="690" stroke="#ffffff" stroke-width="5"/>
+    <rect x="250" y="138" width="700" height="40" rx="10" fill="#ffffff" stroke-width="8"/>
+    <rect x="250" y="650" width="700" height="40" rx="10" fill="#ffffff" stroke-width="8"/>
+    <!-- ke góc -->
+    <path d="M310 178 h40 l-40 40 z" fill="#e9803d" stroke-width="6"/><path d="M890 178 h-40 l40 40 z" fill="#e9803d" stroke-width="6"/>
+    <path d="M310 650 h40 l-40 -40 z" fill="#e9803d" stroke-width="6"/><path d="M890 650 h-40 l40 -40 z" fill="#e9803d" stroke-width="6"/>
+    <!-- động cơ A, B trên dầm -->
+    <rect x="286" y="76" width="76" height="66" rx="10" fill="#ffffff" stroke-width="8"/><rect x="300" y="90" width="48" height="16" rx="4" fill="#163c6c" stroke="none"/><circle cx="324" cy="124" r="9" fill="#e9803d" stroke-width="5"/>
+    <rect x="838" y="76" width="76" height="66" rx="10" fill="#ffffff" stroke-width="8"/><rect x="852" y="90" width="48" height="16" rx="4" fill="#163c6c" stroke="none"/><circle cx="876" cy="124" r="9" fill="#e9803d" stroke-width="5"/>
+    <!-- camera giữa dầm trên, nhìn xuống -->
+    <rect x="560" y="96" width="80" height="46" rx="12" fill="#ffffff" stroke-width="8"/>
+    <rect x="584" y="138" width="32" height="20" rx="5" fill="#163c6c" stroke="none"/>
+    <circle cx="600" cy="119" r="10" fill="#a9cdee" stroke-width="5"/><circle cx="626" cy="108" r="4" fill="#e9803d" stroke="none"/>
+    <!-- ray X, dây đai -->
+    <rect x="310" y="214" width="580" height="22" rx="8" fill="#e1ecf9" stroke-width="7"/>
+    <line x1="324" y1="200" x2="876" y2="200" stroke-width="5"/><circle cx="324" cy="200" r="9" fill="#ffffff" stroke-width="5"/><circle cx="876" cy="200" r="9" fill="#ffffff" stroke-width="5"/>
+    <!-- bàn trượt + trục Z vít me -->
+    <rect x="548" y="190" width="104" height="62" rx="12" fill="#ffffff" stroke-width="8"/>
+    <rect x="568" y="206" width="64" height="30" rx="6" fill="#a9cdee" stroke-width="5"/>
+    <rect x="584" y="252" width="32" height="170" fill="url(#screw)" stroke-width="7"/>
+    <rect x="566" y="300" width="68" height="34" rx="8" fill="#ffffff" stroke-width="7"/>
+    <!-- lòng bàn tay -->
+    <rect x="540" y="420" width="120" height="40" rx="12" fill="#a9cdee" stroke-width="8"/>
+    <!-- hai ngón tay robot có đốt, đệm xúc giác cam ở mặt trong -->
+    <rect x="546" y="456" width="32" height="56" rx="10" fill="#ffffff" stroke-width="8"/>
+    <rect x="550" y="508" width="30" height="50" rx="10" fill="#ffffff" stroke-width="8"/>
+    <circle cx="562" cy="510" r="9" fill="#163c6c" stroke="none"/>
+    <rect x="622" y="456" width="32" height="56" rx="10" fill="#ffffff" stroke-width="8"/>
+    <rect x="620" y="508" width="30" height="50" rx="10" fill="#ffffff" stroke-width="8"/>
+    <circle cx="638" cy="510" r="9" fill="#163c6c" stroke="none"/>
+    <rect x="574" y="466" width="10" height="84" rx="4" fill="#e9803d" stroke-width="5"/>
+    <rect x="616" y="466" width="10" height="84" rx="4" fill="#e9803d" stroke-width="5"/>
+    <g fill="#ffffff" stroke="none"><circle cx="579" cy="480" r="2"/><circle cx="579" cy="494" r="2"/><circle cx="579" cy="508" r="2"/><circle cx="579" cy="522" r="2"/><circle cx="579" cy="536" r="2"/><circle cx="621" cy="480" r="2"/><circle cx="621" cy="494" r="2"/><circle cx="621" cy="508" r="2"/><circle cx="621" cy="522" r="2"/><circle cx="621" cy="536" r="2"/></g>
+    <!-- vật đang cầm (quả trứng/viên bi mềm) -->
+    <ellipse cx="600" cy="510" rx="15" ry="22" fill="#ffffff" stroke-width="7"/>
+    <ellipse cx="595" cy="502" rx="4" ry="7" fill="#a9cdee" stroke="none"/>
+    <!-- bàn máy và khay -->
+    <rect x="360" y="600" width="480" height="30" rx="8" fill="#e1ecf9" stroke-width="8"/>
+    <g fill="#9fb0c8" stroke="none"><circle cx="400" cy="615" r="5"/><circle cx="450" cy="615" r="5"/><circle cx="500" cy="615" r="5"/><circle cx="700" cy="615" r="5"/><circle cx="750" cy="615" r="5"/><circle cx="800" cy="615" r="5"/></g>
+    <path d="M540 600 v-26 h120 v26" fill="#ffffff" stroke-width="7"/>
+    <!-- màn hình phản hồi: bản đồ lực xúc giác + ảnh camera -->
+    <path d="M660 440 C 760 440, 820 400, 960 400" fill="none" stroke-width="6"/>
+    <rect x="960" y="300" width="170" height="250" rx="16" fill="#ffffff" stroke-width="8"/>
+    <rect x="978" y="318" width="134" height="96" rx="8" fill="#163c6c" stroke-width="5"/>
+    <g stroke="none">
+      <rect x="988" y="328" width="18" height="18" fill="#2c6fb0"/><rect x="1010" y="328" width="18" height="18" fill="#f6c9a6"/><rect x="1032" y="328" width="18" height="18" fill="#e9803d"/><rect x="1054" y="328" width="18" height="18" fill="#f6c9a6"/><rect x="1076" y="328" width="18" height="18" fill="#2c6fb0"/>
+      <rect x="988" y="350" width="18" height="18" fill="#f6c9a6"/><rect x="1010" y="350" width="18" height="18" fill="#e9803d"/><rect x="1032" y="350" width="18" height="18" fill="#fee761"/><rect x="1054" y="350" width="18" height="18" fill="#e9803d"/><rect x="1076" y="350" width="18" height="18" fill="#f6c9a6"/>
+      <rect x="988" y="372" width="18" height="18" fill="#2c6fb0"/><rect x="1010" y="372" width="18" height="18" fill="#f6c9a6"/><rect x="1032" y="372" width="18" height="18" fill="#e9803d"/><rect x="1054" y="372" width="18" height="18" fill="#f6c9a6"/><rect x="1076" y="372" width="18" height="18" fill="#2c6fb0"/>
+      <rect x="988" y="394" width="104" height="10" fill="#2c6fb0"/>
+    </g>
+    <rect x="978" y="428" width="134" height="100" rx="8" fill="#e1ecf9" stroke-width="5"/>
+    <ellipse cx="1045" cy="480" rx="15" ry="21" fill="#ffffff" stroke-width="5"/>
+    <rect x="1018" y="450" width="54" height="60" rx="4" fill="none" stroke="#e9803d" stroke-width="5"/>
+    <circle cx="1018" cy="450" r="5" fill="#e9803d" stroke="none"/>
+  </g>
+</svg>

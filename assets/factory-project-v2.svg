@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="90 80 1080 720" width="1080" height="720">
+  <!-- Bản vẽ: hệ thống AI hỗ trợ quản lý nhà máy (máy CNC, cảm biến, gateway, đám mây AI, bảng OEE). Nhìn ngang, phong cách phẳng. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f0fb"/><stop offset=".6" stop-color="#eef3fa"/><stop offset="1" stop-color="#fbeee3"/></linearGradient>
+    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#c9d8ea"/></pattern>
+    <g id="cnc">
+      <!-- máy CNC: thân, cửa kính, trục chính, phôi, bảng điều khiển, đèn tháp -->
+      <rect x="0" y="40" width="210" height="220" rx="18" fill="#ffffff" stroke="#163c6c" stroke-width="8"/>
+      <rect x="16" y="64" width="124" height="130" rx="10" fill="#e1ecf9" stroke="#163c6c" stroke-width="6"/>
+      <rect x="62" y="64" width="32" height="44" fill="#a9cdee" stroke="#163c6c" stroke-width="5"/>
+      <path d="M70 108 h16 l-8 18 z" fill="#163c6c"/>
+      <rect x="46" y="150" width="64" height="26" rx="4" fill="#e9803d" stroke="#163c6c" stroke-width="5"/>
+      <rect x="36" y="176" width="84" height="10" fill="#9fb0c8"/>
+      <rect x="152" y="64" width="44" height="100" rx="8" fill="#163c6c"/>
+      <rect x="158" y="72" width="32" height="26" rx="4" fill="#5cc2f0"/>
+      <circle cx="166" cy="114" r="5" fill="#e9803d"/><circle cx="182" cy="114" r="5" fill="#ffffff"/><circle cx="166" cy="132" r="5" fill="#ffffff"/><circle cx="182" cy="132" r="5" fill="#ffffff"/>
+      <rect x="0" y="206" width="210" height="54" rx="0" fill="#a9cdee" stroke="#163c6c" stroke-width="8"/>
+      <rect x="20" y="222" width="60" height="10" rx="3" fill="#163c6c"/>
+      <rect x="176" y="-10" width="16" height="52" rx="4" fill="#ffffff" stroke="#163c6c" stroke-width="5"/>
+      <rect x="179" y="-6" width="10" height="13" fill="#3ec46d"/><rect x="179" y="9" width="10" height="13" fill="#feae34"/><rect x="179" y="24" width="10" height="13" fill="#e43b44" opacity=".35"/>
+      <!-- kẹp dòng (cảm biến) -->
+      <rect x="8" y="10" width="34" height="26" rx="8" fill="#e9803d" stroke="#163c6c" stroke-width="5"/>
+      <circle cx="25" cy="23" r="5" fill="#ffffff"/>
+    </g>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#dots)" opacity=".55"/>
+  <ellipse cx="560" cy="730" rx="470" ry="14" fill="#163c6c" opacity=".1"/>
+  <line x1="60" y1="726" x2="1140" y2="726" stroke="#9fb0c8" stroke-width="4" stroke-dasharray="14 12" stroke-linecap="round"/>
+
+  <!-- dây dữ liệu từ cảm biến về gateway -->
+  <g fill="none" stroke="#163c6c" stroke-width="6" stroke-linecap="round">
+    <path d="M155 486 V366 H510"/>
+    <path d="M405 486 V440 H570 V400"/>
+    <path d="M655 486 V440 H630 V400"/>
+    <path d="M600 330 V250"/>
+    <path d="M680 350 H900"/>
+  </g>
+  <!-- gói dữ liệu -->
+  <g fill="#e9803d"><circle cx="320" cy="366" r="8"/><circle cx="480" cy="440" r="8"/><circle cx="645" cy="440" r="8"/><circle cx="600" cy="284" r="8"/><circle cx="800" cy="350" r="8"/></g>
+
+  <!-- ba máy CNC -->
+  <use href="#cnc" x="130" y="466"/>
+  <use href="#cnc" x="380" y="466"/>
+  <use href="#cnc" x="630" y="466"/>
+
+  <!-- gateway IoT -->
+  <g stroke="#163c6c" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="510" y="330" width="180" height="70" rx="16" fill="#ffffff" stroke-width="8"/>
+    <rect x="530" y="350" width="80" height="30" rx="6" fill="#163c6c" stroke="none"/>
+    <circle cx="545" cy="365" r="5" fill="#3ec46d" stroke="none"/><circle cx="565" cy="365" r="5" fill="#5cc2f0" stroke="none"/><circle cx="585" cy="365" r="5" fill="#e9803d" stroke="none"/>
+    <line x1="650" y1="330" x2="650" y2="296" stroke-width="7"/><circle cx="650" cy="290" r="8" fill="#e9803d" stroke-width="5"/>
+    <!-- đám mây AI -->
+    <path d="M470 250 a62 62 0 0 1 30 -116 a86 86 0 0 1 160 -18 a66 66 0 0 1 72 134 z" fill="#ffffff" stroke-width="9"/>
+    <rect x="560" y="148" width="80" height="80" rx="14" fill="#163c6c" stroke-width="0"/>
+    <g stroke="#a9cdee" stroke-width="6"><line x1="576" y1="140" x2="576" y2="150"/><line x1="600" y1="140" x2="600" y2="150"/><line x1="624" y1="140" x2="624" y2="150"/><line x1="576" y1="226" x2="576" y2="236"/><line x1="600" y1="226" x2="600" y2="236"/><line x1="624" y1="226" x2="624" y2="236"/><line x1="552" y1="164" x2="562" y2="164"/><line x1="552" y1="188" x2="562" y2="188"/><line x1="552" y1="212" x2="562" y2="212"/><line x1="638" y1="164" x2="648" y2="164"/><line x1="638" y1="188" x2="648" y2="188"/><line x1="638" y1="212" x2="648" y2="212"/></g>
+    <path d="M600 162 l9 20 l20 9 l-20 9 l-9 20 l-9 -20 l-20 -9 l20 -9 z" fill="#e9803d" stroke="none"/>
+    <!-- bảng OEE -->
+    <rect x="900" y="250" width="230" height="200" rx="18" fill="#ffffff" stroke-width="8"/>
+    <rect x="920" y="270" width="190" height="160" rx="10" fill="#e1ecf9" stroke-width="5"/>
+    <path d="M950 360 a50 50 0 0 1 100 0" fill="none" stroke="#c9d8ea" stroke-width="16"/>
+    <path d="M950 360 a50 50 0 0 1 87 -34" fill="none" stroke="#e9803d" stroke-width="16"/>
+    <line x1="1000" y1="360" x2="1028" y2="326" stroke-width="6"/><circle cx="1000" cy="360" r="7" fill="#163c6c" stroke="none"/>
+    <g stroke="none"><rect x="1062" y="330" width="12" height="30" rx="3" fill="#163c6c"/><rect x="1080" y="312" width="12" height="48" rx="3" fill="#0084ed"/></g>
+    <g stroke="none"><rect x="938" y="380" width="152" height="12" rx="6" fill="#c9d8ea"/><rect x="938" y="380" width="118" height="12" rx="6" fill="#3ec46d"/><rect x="938" y="402" width="152" height="12" rx="6" fill="#c9d8ea"/><rect x="938" y="402" width="88" height="12" rx="6" fill="#feae34"/></g>
+    <rect x="1000" y="450" width="30" height="40" fill="#a9cdee" stroke-width="7"/>
+    <rect x="960" y="486" width="110" height="18" rx="6" fill="#ffffff" stroke-width="7"/>
+  </g>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="120 112 960 640" width="960" height="640">
+  <!-- Bản phác: xe mecanum dạng module, nhìn ngang, phong cách phẳng như clip motion.
+       Dưới: thân xe + bánh mecanum. Trên (đặt hờ): module cảm biến (LiDAR, camera, thu phát) và module cánh tay 3 bậc.
+       Hai module dùng chung một giao diện gắn với thân xe. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f0fb"/><stop offset=".6" stop-color="#eef3fa"/><stop offset="1" stop-color="#fbeee3"/></linearGradient>
+    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#c9d8ea"/></pattern>
+    <pattern id="roller" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="26" height="26" fill="#d7e2ef"/><rect width="12" height="26" fill="#9fb0c8"/></pattern>
+    <clipPath id="tireL"><circle cx="440" cy="672" r="74"/></clipPath>
+    <clipPath id="tireR"><circle cx="760" cy="672" r="74"/></clipPath>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#dots)" opacity=".55"/>
+
+  <!-- mặt sàn -->
+  <ellipse cx="600" cy="752" rx="330" ry="16" fill="#163c6c" opacity=".1"/>
+  <line x1="200" y1="748" x2="1000" y2="748" stroke="#9fb0c8" stroke-width="4" stroke-dasharray="14 12" stroke-linecap="round"/>
+
+  <!-- ===== Thân xe + bánh mecanum (module dưới) ===== -->
+  <g stroke="#163c6c" stroke-linejoin="round">
+    <rect x="452" y="494" width="296" height="26" rx="8" fill="#a9cdee" stroke-width="7"/>
+    <g fill="#163c6c" stroke="none"><rect x="500" y="482" width="22" height="14" rx="3"/><rect x="589" y="482" width="22" height="14" rx="3"/><rect x="678" y="482" width="22" height="14" rx="3"/></g>
+    <rect x="340" y="516" width="520" height="140" rx="30" fill="#ffffff" stroke-width="9"/>
+    <rect x="372" y="540" width="456" height="92" rx="16" fill="#e1ecf9" stroke-width="5"/>
+    <g stroke-width="6" stroke-linecap="round"><line x1="530" y1="566" x2="530" y2="606"/><line x1="556" y1="566" x2="556" y2="606"/><line x1="582" y1="566" x2="582" y2="606"/><line x1="608" y1="566" x2="608" y2="606"/></g>
+    <rect x="652" y="566" width="62" height="40" rx="8" fill="#ffffff" stroke-width="5"/>
+    <circle cx="672" cy="586" r="7" fill="#e9803d" stroke="none"/><circle cx="696" cy="586" r="7" fill="#0084ed" stroke="none"/>
+    <rect x="352" y="568" width="14" height="36" rx="6" fill="#e9803d" stroke-width="5"/>
+    <rect x="834" y="568" width="14" height="36" rx="6" fill="#ffffff" stroke-width="5"/>
+  </g>
+  <!-- bánh mecanum nhìn ngang: lốp là các con lăn chéo, mâm trắng, trục cam -->
+  <g>
+    <circle cx="440" cy="672" r="78" fill="#163c6c"/>
+    <rect x="360" y="592" width="160" height="160" fill="url(#roller)" clip-path="url(#tireL)"/>
+    <circle cx="440" cy="672" r="44" fill="#ffffff" stroke="#163c6c" stroke-width="8"/>
+    <circle cx="440" cy="672" r="16" fill="#e9803d" stroke="#163c6c" stroke-width="5"/>
+    <g fill="#163c6c"><circle cx="440" cy="645" r="5"/><circle cx="467" cy="672" r="5"/><circle cx="440" cy="699" r="5"/><circle cx="413" cy="672" r="5"/></g>
+    <circle cx="760" cy="672" r="78" fill="#163c6c"/>
+    <rect x="680" y="592" width="160" height="160" fill="url(#roller)" clip-path="url(#tireR)"/>
+    <circle cx="760" cy="672" r="44" fill="#ffffff" stroke="#163c6c" stroke-width="8"/>
+    <circle cx="760" cy="672" r="16" fill="#e9803d" stroke="#163c6c" stroke-width="5"/>
+    <g fill="#163c6c"><circle cx="760" cy="645" r="5"/><circle cx="787" cy="672" r="5"/><circle cx="760" cy="699" r="5"/><circle cx="733" cy="672" r="5"/></g>
+  </g>
+
+  <!-- ===== Module 1: cảm biến (LiDAR + camera + thu phát) ===== -->
+  <g stroke="#163c6c" stroke-linejoin="round">
+    <ellipse cx="392" cy="458" rx="120" ry="9" fill="#163c6c" opacity=".08" stroke="none"/>
+    <g fill="none" stroke="#0084ed" stroke-width="6" stroke-linecap="round">
+      <path d="M470 156 A26 26 0 0 1 470 196"/><path d="M486 140 A48 48 0 0 1 486 212"/><path d="M502 124 A70 70 0 0 1 502 228"/>
+    </g>
+    <line x1="454" y1="176" x2="454" y2="320" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="454" cy="172" r="10" fill="#e9803d" stroke-width="5"/>
+    <rect x="320" y="250" width="104" height="62" rx="14" fill="#ffffff" stroke-width="8"/>
+    <rect x="320" y="270" width="104" height="18" fill="#163c6c" stroke="none"/>
+    <rect x="356" y="273" width="32" height="12" rx="4" fill="#e9803d" stroke="none"/>
+    <rect x="336" y="232" width="72" height="22" rx="9" fill="#a9cdee" stroke-width="7"/>
+    <rect x="268" y="316" width="248" height="104" rx="20" fill="#ffffff" stroke-width="9"/>
+    <rect x="292" y="338" width="200" height="60" rx="12" fill="#fdeee2" stroke-width="5"/>
+    <rect x="304" y="350" width="74" height="36" rx="10" fill="#a9cdee" stroke-width="6"/>
+    <circle cx="341" cy="368" r="12" fill="#163c6c" stroke="none"/><circle cx="337" cy="364" r="4" fill="#ffffff" stroke="none"/>
+    <circle cx="420" cy="368" r="7" fill="#0084ed" stroke="none"/><circle cx="446" cy="368" r="7" fill="#e9803d" stroke="none"/><circle cx="472" cy="368" r="7" fill="#9fb0c8" stroke="none"/>
+    <rect x="320" y="420" width="144" height="16" rx="6" fill="#a9cdee" stroke-width="6"/>
+    <g fill="#163c6c" stroke="none"><rect x="336" y="434" width="18" height="10" rx="2"/><rect x="383" y="434" width="18" height="10" rx="2"/><rect x="430" y="434" width="18" height="10" rx="2"/></g>
+  </g>
+
+  <!-- ===== Module 2: cánh tay robot 3 bậc tự do ===== -->
+  <g stroke="#163c6c" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="808" cy="458" rx="120" ry="9" fill="#163c6c" opacity=".08" stroke="none"/>
+    <rect x="700" y="348" width="216" height="72" rx="20" fill="#ffffff" stroke-width="9"/>
+    <rect x="722" y="368" width="172" height="32" rx="10" fill="#e1ecf9" stroke-width="5"/>
+    <rect x="752" y="318" width="96" height="34" rx="12" fill="#a9cdee" stroke-width="8"/>
+    <line x1="800" y1="320" x2="866" y2="190" stroke="#163c6c" stroke-width="92"/>
+    <line x1="800" y1="320" x2="866" y2="190" stroke="#ffffff" stroke-width="72"/>
+    <line x1="812" y1="292" x2="852" y2="214" stroke="#0084ed" stroke-width="20"/>
+    <line x1="866" y1="190" x2="1000" y2="226" stroke="#163c6c" stroke-width="80"/>
+    <line x1="866" y1="190" x2="1000" y2="226" stroke="#ffffff" stroke-width="60"/>
+    <line x1="900" y1="204" x2="966" y2="222" stroke="#a9cdee" stroke-width="16"/>
+    <rect x="962" y="236" width="80" height="40" rx="12" fill="#a9cdee" stroke-width="9"/>
+    <rect x="986" y="304" width="32" height="28" rx="5" fill="#e9803d" stroke-width="7"/>
+    <path d="M966 272 h18 v66 l-10 10 h-8 z" fill="#a9cdee" stroke-width="8"/>
+    <path d="M1038 272 h-18 v66 l10 10 h8 z" fill="#a9cdee" stroke-width="8"/>
+    <circle cx="800" cy="320" r="40" fill="#ffffff" stroke-width="10"/><circle cx="800" cy="320" r="15" fill="#e9803d" stroke="none"/>
+    <circle cx="866" cy="190" r="36" fill="#ffffff" stroke-width="10"/><circle cx="866" cy="190" r="13" fill="#e9803d" stroke="none"/>
+    <circle cx="1000" cy="226" r="28" fill="#ffffff" stroke-width="9"/><circle cx="1000" cy="226" r="10" fill="#e9803d" stroke="none"/>
+    <rect x="736" y="420" width="144" height="16" rx="6" fill="#a9cdee" stroke-width="6"/>
+    <g fill="#163c6c" stroke="none"><rect x="752" y="434" width="18" height="10" rx="2"/><rect x="799" y="434" width="18" height="10" rx="2"/><rect x="846" y="434" width="18" height="10" rx="2"/></g>
+  </g>
+</svg>
