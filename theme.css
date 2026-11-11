@@ -306,22 +306,9 @@ main>section.section{padding-block:10px}
 #home .lab-summary .intro-copy{margin-bottom:0}
 #home .lab-summary .focus-grid{flex:1 1 auto}
 
-/* thử: 2 hàng dự án mỗi dòng */
-@media (min-width:1001px){
-  #open-work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;align-items:stretch}
-  #open-work>.section-heading{grid-column:1/-1;margin-bottom:0}
-  #open-work .project-row{max-width:none;margin:0;padding:12px;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start}
-  #open-work .row-tag{font-size:11.5px}
-  #open-work .row-title{font-size:13.5px;margin:3px 0 8px}
-  #open-work .row-desc{font-size:12.5px;line-height:1.5;margin-top:8px}
-  #open-work .row-head{min-height:22px;gap:6px}
-  #open-work .project-meta{gap:5px}
-  #open-work .project-meta .project-timeline{font-size:10px}
-  #open-work .project-docs .rct-story-link{font-size:11.5px}
-  #open-work .clip-toggle{width:30px;height:30px;top:8px;right:8px}
-}
 /* khoảng cách đều: trên tiêu đề mục 22 px, dưới tiêu đề 12 px */
 main>section.rct-intro{padding-bottom:10px}
 main>section.section{padding-top:12px;padding-bottom:10px}
 #news .section-heading,#community .section-heading{margin-bottom:12px}
-@media (max-width:1000px){#open-work .section-heading{margin-bottom:12px}}
+#open-work .section-heading{margin-bottom:12px}
+#open-work .project-row:last-child{margin-bottom:0}
