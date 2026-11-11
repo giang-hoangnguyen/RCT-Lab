@@ -279,3 +279,29 @@ main>section.section,main>section.research-section,main>section.community-sectio
 .project-main,.project-docs{display:grid;grid-row:span 4;grid-template-rows:subgrid;align-content:start}
 .project-row .row-title{align-self:start}
 @media (max-width:820px){.project-main,.project-docs{display:flex;flex-direction:column}.project-row{grid-template-rows:none;row-gap:24px}}
+
+/* ===== Trang gọn: bớt khoảng trống, tiêu đề mục cùng kiểu "GIỚI THIỆU BẢN THÂN", icon nhỏ ngang cỡ chữ ===== */
+main>section.rct-intro{padding-block:16px 4px}
+.personal-sidebar,.lab-summary{padding:18px}
+.about-copy{padding-top:12px}
+#home .focus-grid{flex:0 0 auto;margin-top:12px;gap:14px}
+#home .focus-card h2{flex-direction:row;min-height:0;padding:8px 10px;gap:8px;margin:0 0 6px;font-size:13.5px}
+#home .focus-icon{width:26px;height:26px}
+#home .focus-icon .ico{width:18px;height:18px}
+#home .focus-card ul{padding:6px 8px}
+#home .focus-card li{padding:2px 0;font-size:12.5px}
+main>section.section{padding-block:10px}
+.section-heading{margin-bottom:10px}
+.section-heading h2,.community-layout h2{font:800 12px/1.4 "Segoe UI",Inter,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--tag);gap:8px}
+.section-icon{width:22px;height:22px;border-radius:6px;border-width:1.5px;box-shadow:1.5px 1.5px 0 var(--orange)}
+.section-icon .ico{width:15px;height:15px}
+.news-brief-list{padding:6px}
+.dated-news{padding-block:7px}
+.project-row{padding:14px;margin-bottom:12px}
+.sim-box{padding:16px}
+.sim-frame{margin:10px 0 8px}
+#home .lab-summary{justify-content:flex-start}
+#home .lab-summary .focus-grid{margin-top:14px}
+.news-brief-list{margin-top:0}
+#home .lab-summary .intro-copy{margin-bottom:0}
+#home .lab-summary .focus-grid{flex:1 1 auto}
